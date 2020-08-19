@@ -3,13 +3,13 @@ import '../CSS/MovieCard.css'
 
 
 function MovieCard(props) {
-  // console.log('movie Card props', props)
+  console.log('movie Card props', props)
     return (
       <article className='MovieCard'>
-        {/* <img src={movie.poster_path} alt={movie.title}/> */}
+        <img src={props.poster_path} alt={props.title}/>
         <p>Title: {props.title}</p>
-        {/* <p>Average Rating: {movie.average_rating}</p> */}
-        {/* <p>Release Date: {movie.release_date}</p> */}
+        <p>Average Rating: {props.rating}</p>
+        <p>Release Date: {props.releaseDate}</p>
       </article>
     )
 }

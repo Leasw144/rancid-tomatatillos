@@ -3,9 +3,10 @@ import MovieCard from './MovieCard'
 
 
 function CardSection(props) {
-  console.log('props.allMovies', props)
   let movies;
-  if (props.allMovies.length > 0) {
+  console.log('length', props.allMovies.length)
+  if (props.allMovies) {
+    console.log('test')
     movies = props.allMovies.movies.map(movie => {
       return (
         <MovieCard
@@ -18,12 +19,8 @@ function CardSection(props) {
       )
     })
   }
-  return (
-    <section>
-      {movies}
-    </section>
-  )
 }
+
 
 
 export default CardSection
