@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import './CSS/App.css';
+import Header from './Components/Header'
+import CardSection from './Components/CardSection'
+import './assets/tomato.jpg'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {  
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     movies: null
+  //   }
+  // }
+
+  // componentDidMount() {
+  //   fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+  //     .then(response => response.json())
+  //     .then(movies => this.setState({ movies }))
+  //     .then(movies => console.log(this.state))
+  //     .catch(error => console.log('Movie not found'))
+  // }
+  
+  render() {
+    return (
+      <main className="App">
+        <Header />
+        <CardSection/>              
+      </main>
+    )
+  };
 }
 
 export default App;
