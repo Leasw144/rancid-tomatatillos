@@ -3,9 +3,9 @@ import './CSS/App.css';
 import Header from './Components/Header'
 import CardSection from './Components/CardSection'
 import './assets/tomato.jpg'
+import PropTypes from 'prop-types'
 
 class App extends Component {
-import PropTypes from 'prop-types'
 
   constructor() {
     super();
@@ -18,8 +18,7 @@ import PropTypes from 'prop-types'
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
-      .then(movies => this.setState({ movies }))
-      // .then(movies => console.log(this.state))
+      .then(movies => this.setState(({movies})))
       .catch(error => console.log('Movie not found'))
   }
 
@@ -27,15 +26,15 @@ import PropTypes from 'prop-types'
     return (
       <main className="App">
         <Header />
-        <CardSection/>
+        <CardSection allMovies={this.state.movies}/>
       </main>
     )
   };
 
-  App.PropTypes = {
-    movies: PropTypes.array,
-    error: PropTypes.string
-  }
+  // App.PropTypes = {
+  //   movies: PropTypes.array,
+  //   error: PropTypes.string
+  // }
 
 
 }
