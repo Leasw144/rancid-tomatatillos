@@ -4,9 +4,9 @@ import MovieCard from './MovieCard'
 
 function CardSection(props) {
   let movies;
-  console.log('length', props.allMovies.length)
-  if (props.allMovies) {
-    console.log('test')
+  console.log('length', props.allMovies.movies)
+  if (props.allMovies.length > 0) {
+    console.log('test', props)
     movies = props.allMovies.movies.map(movie => {
       return (
         <MovieCard
@@ -19,6 +19,11 @@ function CardSection(props) {
       )
     })
   }
+  return (
+    <section>
+      {movies}
+    </section>
+  )
 }
 
 
