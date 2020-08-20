@@ -11,14 +11,15 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
-      error: ''
+      error: '',
+      user:{}
     }
   }
 
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
-      .then(movies => this.setState(({movies})))
+      .then(data => this.setState({movies: data.movies}))
       .catch(error => console.log('Movie not found'))
   }
 

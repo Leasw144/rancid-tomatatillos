@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import MovieCard from './MovieCard'
-
+import '../CSS/CardSection.css'
 
 function CardSection(props) {
   let movies;
-  console.log('length', props.allMovies.movies)
+  console.log('length', props.allMovies)
   if (props.allMovies.length > 0) {
     console.log('test', props)
-    movies = props.allMovies.movies.map(movie => {
+    movies = props.allMovies.map(movie => {
       return (
         <MovieCard
         key={movie.id}
@@ -20,7 +20,7 @@ function CardSection(props) {
     })
   }
   return (
-    <section>
+    <section className='card-section'>
       {movies}
     </section>
   )
