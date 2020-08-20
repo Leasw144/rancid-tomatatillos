@@ -7,9 +7,9 @@ function MovieCard(props) {
     return (
       <article className='MovieCard'>
         <img src={props.img} alt={props.title}/>
-        <p>Title: {props.title}</p>
-        <p>Average Rating: {props.rating}</p>
-        <p>Release Date: {props.releaseDate}</p>
+        <p><span>Title:</span> {props.title}</p>
+        <p><span>Average Rating:</span> {props.rating}</p>
+        <p><span>Release Date:</span> {props.releaseDate}</p>
       </article>
     )
 }

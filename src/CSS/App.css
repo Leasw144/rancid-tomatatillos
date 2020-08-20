@@ -2,6 +2,7 @@
   text-align: center;
   background-color: #3C3E3C;
   font-family: ‘Teko’, sans-serif;
+  font-size: 12px;
 }
 
 .App-logo {
@@ -41,4 +42,9 @@
 
 .error-msg {
   color: #E8EDDF;
+}
+
+.App p {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }
