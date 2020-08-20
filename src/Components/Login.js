@@ -6,12 +6,13 @@ class Login extends Component {
     super();
     this.state = {
     username:'',
-    password: ''
+    password: '',
+    error: ''
     }
 
   }
 
-  getUser = () => {
+  getUser = (event) => {
     event.preventDefault()
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
       method: 'POST',
@@ -26,11 +27,16 @@ class Login extends Component {
     })
       .then(response => response.json())
       .then(data => console.log(data))
-      .catch(err => console.error(err))
+      .catch(error => {
+        console.log('Error fetching user')
+        this.setState({error: 'Please check your login information'})
+      })
   }
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value})
   }
+
   render() {
     return (
       <section className='form-parent'>
@@ -50,8 +56,8 @@ class Login extends Component {
           value={this.state.password}
           onChange = {this.handleChange}
           />
-
-          <button onClick = {this.getUser}>Submit</button>
+          { this.state.error && <p className='error-msg'>{this.state.userError}</p> }
+          <button onClick = { event => this.getUser(event)}>Submit</button>
         </form>
       </section>
       )
