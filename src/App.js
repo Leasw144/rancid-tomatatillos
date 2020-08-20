@@ -32,7 +32,7 @@ class App extends Component {
       <main className="App">
         <Header />
           {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-          <Login />
+          <Login username={this.state.user} />
         {/* <CardSection allMovies={this.state.movies}/> */}
       </main>
     )

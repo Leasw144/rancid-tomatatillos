@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import '../CSS/Login.css';
+import App from '../App';
 
 class Login extends Component {
   constructor(){
@@ -12,7 +13,7 @@ class Login extends Component {
 
   }
 
-  getUser = (event) => {
+  getUser(event) {
     event.preventDefault()
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
       method: 'POST',
@@ -26,7 +27,7 @@ class Login extends Component {
       })
     })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => this.setState({user: data.user}))
       .catch(error => {
         console.log('Error fetching user')
         this.setState({error: 'Please check your login information'})
