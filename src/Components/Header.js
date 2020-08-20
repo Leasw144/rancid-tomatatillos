@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import '../CSS/Header.css'
+import tomato from '../assets/tomato.jpg'
 
 function Header() {
   return (
     <header>
-      <img src='./assets/tomato.jpg' alt='tomato' />
+      <img className= 'tomato' src={tomato} alt='tomato' />
       <h1>
         Welcome! X
       </h1>
