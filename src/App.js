@@ -3,6 +3,7 @@ import './CSS/App.css';
 import Header from './Components/Header'
 import CardSection from './Components/CardSection'
 import './assets/tomato.jpg'
+import Login from './Components/Login'
 import PropTypes from 'prop-types'
 
 class App extends Component {
@@ -31,7 +32,8 @@ class App extends Component {
       <main className="App">
         <Header />
           {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-        <CardSection allMovies={this.state.movies}/>
+          <Login />
+        {/* <CardSection allMovies={this.state.movies}/> */}
       </main>
     )
   };

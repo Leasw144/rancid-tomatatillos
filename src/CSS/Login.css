@@ -1,0 +1,27 @@
+/* .form-parent {
+ display: flex;
+ justify-content: center;
+
+} */
+
+.Login {
+  width: 320px;
+  height: 420px;
+  background-color: #C9CBA3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 1vh 4vh;
+  font-size: 12px;
+
+    /* align-items: center;
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    /* justify-content: center;
+    padding: 8px;
+    width: 9rem;
+    border: 2px solid red; */ 
+}
