@@ -7,10 +7,10 @@
 ### Why is this change required? What problem does it solve?
 ### Were there any challenges that arose while implementing this feature? If so, how were the addressed?
 ### Files modified:
-- [ ] index.html
-- [ ] style.scss
-- [ ] scripts.js
-- [ ] domUpdates.js
-- [ ] Other files:
-
+- [ ] App.js
+- [ ] CardSection.js
+- [ ] Header.js
+- [ ] Login.js
+- [ ] MovieCard.js
+- [ ] OtherFiles
 ### Message/Questions for reviewer:

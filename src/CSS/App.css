@@ -1,7 +1,8 @@
 .App {
   text-align: center;
-  background-color: #FFE1A8;
+  background-color: #3C3E3C;
   font-family: ‘Teko’, sans-serif;
+  font-size: 12px;
 }
 
 .App-logo {
@@ -37,4 +38,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.error-msg {
+  color: #E8EDDF;
+}
+
+.App p {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }

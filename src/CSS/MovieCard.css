@@ -1,13 +1,14 @@
 .MovieCard {
-  max-height: 350px;
-  width: 200px;
-  background-color: aqua;
-  border: red;
-
+  background-color:#FFE1A8;
+  border: 1px solid #9A031E;
+  padding-bottom: 1em;
 }
 
 .MovieCard > img {
-  object-fit: cover;
-  opacity: 0.4;
-  height: 400px;
+  width:100%;
+  margin-bottom: 0.6em;
+}
+
+span {
+  font-weight: bold;
 }

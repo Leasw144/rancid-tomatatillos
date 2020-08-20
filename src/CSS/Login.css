@@ -1,0 +1,39 @@
+.form-parent {
+ /* display: flex;
+ justify-content: center; */
+
+ align-items: center;
+ display: flex;
+ height: 100vh;
+ justify-content: center;
+ padding: 8px;
+ background: #fff;
+ width: 100vw;
+
+}
+
+.Login {
+    background: #C9CBA3;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 6px;
+    height: 18rem;
+    width: 12rem;
+}
+
+input {
+  margin-bottom: 2em;
+  padding: 0.4rem;
+}
+
+label {
+  padding-right: 4.4rem;
+  margin-bottom: .5rem;
+}
+
+.Login button {
+  padding: 0.6em 3em;
+}
