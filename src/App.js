@@ -20,13 +20,17 @@ class App extends Component {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
       .then(data => this.setState({movies: data.movies}))
-      .catch(error => console.log('Movie not found'))
+      .catch(error => {
+        console.log('Error fetching all movies')
+        this.setState({ error: 'An error has occured'})
+      })
   }
 
   render() {
     return (
       <main className="App">
         <Header />
+          {this.state.error && <p className='error-msg'>{this.state.error}</p>}
         <CardSection allMovies={this.state.movies}/>
       </main>
     )
