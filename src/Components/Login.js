@@ -27,22 +27,22 @@ class Login extends Component {
 
   render() {
     return (
-      <section className='form-parent'>
-        <form className='Login'>
+      <section className='Login'>
+        <form className='form-section'>
           <label for="username">Username:</label>
           <input
-          type='text'
-          name='username'
-          value={this.state.username}
-          onChange = {this.handleChange}
+            type='text'
+            name='username'
+            value={this.state.username}
+            onChange = {this.handleChange}
           />
 
           <label for="password">Password:</label>
           <input
-          type='password'
-          name='password'
-          value={this.state.password}
-          onChange = {this.handleChange}
+            type='password'
+            name='password'
+            value={this.state.password}
+            onChange = {this.handleChange}
           />
           { this.state.error && <p className='error-msg'>{this.state.userError}</p> }
           <button onClick = { event => this.handleLogIn(event)}>Submit</button>
