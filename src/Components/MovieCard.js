@@ -3,7 +3,6 @@ import '../CSS/MovieCard.css'
 
 
 function MovieCard(props) {
-  console.log('movie Card props', props)
     return (
       <article className='MovieCard'>
         <img src={props.img} alt={props.title}/>

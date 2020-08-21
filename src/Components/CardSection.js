@@ -4,9 +4,7 @@ import '../CSS/CardSection.css'
 
 function CardSection(props) {
   let movies;
-  console.log('length', props.allMovies)
   if (props.allMovies.length > 0) {
-    console.log('test', props)
     movies = props.allMovies.map(movie => {
       return (
         <MovieCard

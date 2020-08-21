@@ -13,11 +13,16 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-      user:{}
+      user:{},
+      isLoggedIn: false,
+      willLogIn: false
     }
   }
 
-
+  //
+ // have click event on Login button in the header, which toggles willLogIn to equal true
+  // if willLogIn is true, render loginPage and hide(?conditional logic and css?) landing page
+  // 
 
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
@@ -29,17 +34,19 @@ class App extends Component {
       })
   }
 
+
+
   render() {
     return (
       <main className="App">
         <Header />
           {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-          <Login username={this.state.user} getUser={this.getUser} />
-        {/* <CardSection allMovies={this.state.movies}/> */}
+          <CardSection allMovies={this.state.movies} />
+          // {this.state.user.name && <CardSection allMovies={this.state.movies} /> }
+          {this.state.user.name && <Login className="hidden"/>}
       </main>
     )
   };
-
 
   getUser = (username, password)  => {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
@@ -65,7 +72,6 @@ class App extends Component {
   //   movies: PropTypes.array,
   //   error: PropTypes.string
   // }
-
 
 }
 
