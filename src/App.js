@@ -17,6 +17,8 @@ class App extends Component {
     }
   }
 
+
+
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
@@ -32,11 +34,32 @@ class App extends Component {
       <main className="App">
         <Header />
           {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-          <Login username={this.state.user} />
+          <Login username={this.state.user} getUser={this.getUser} />
         {/* <CardSection allMovies={this.state.movies}/> */}
       </main>
     )
   };
+
+
+  getUser = (username, password)  => {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: username,
+        password: password,
+
+      })
+    })
+      .then(response => response.json())
+      .then(data => this.setState({user: data.user}))
+      .catch(error => {
+        console.log('Error fetching user')
+        this.setState({error: 'Please check your login information'})
+      })
+  }
 
   // App.PropTypes = {
   //   movies: PropTypes.array,
