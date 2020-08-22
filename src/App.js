@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './CSS/App.css';
-import Header from './Components/Header'
-import CardSection from './Components/CardSection'
+import './App-resources/App.css';
+import Header from './Header/Header'
+import CardSection from './CardSection/CardSection'
 import './assets/tomato.jpg'
-import Login from './Components/Login'
+import Login from './Login/Login'
 import PropTypes from 'prop-types'
 
 class App extends Component {

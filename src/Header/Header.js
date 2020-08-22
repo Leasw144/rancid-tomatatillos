@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../CSS/Header.css'
+import './Header.css'
 import tomato from '../assets/tomato.jpg'
 
 function Header() {

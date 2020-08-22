@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import MovieCard from './MovieCard'
-import '../CSS/CardSection.css'
+import MovieCard from '../MovieCard/MovieCard'
+import './CardSection.css'
 
 function CardSection(props) {
   let movies;
