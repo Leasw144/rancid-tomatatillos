@@ -5,6 +5,7 @@ import CardSection from './CardSection/CardSection'
 import './assets/tomato.jpg'
 import Login from './Login/Login'
 import PropTypes from 'prop-types'
+import {BrowserRouter, Route} from 'react-router-dom'
 
 class App extends Component {
   constructor() {
@@ -29,16 +30,22 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <main className="App">
-        <Header />
-          {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-          <CardSection allMovies={this.state.movies} />
-          {/* // {this.state.user.name && <CardSection allMovies={this.state.movies} /> } */}
-          {this.state.user.name && <Login className="hidden"/>}
-      </main>
-    )
-  };
+      return (
+        <main className="App">
+          <BrowserRouter>
+            <Route path='/login'>
+              <Header handleClick={this.handleClick}/>
+              <Login />
+            </Route>
+              <button type='button' onClick={this.handleClick}> Click Me</button>
+              {this.state.error && <p className='error-msg'>{this.state.error}</p>}
+              <CardSection allMovies={this.state.movies} />
+              {/* // {this.state.user.name && <CardSection allMovies={this.state.movies} /> } */}
+              {this.state.user.name && <Login className="hidden"/>}
+          </BrowserRouter>
+        </main>
+      )
+    };
 
   getUser = (username, password)  => {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
