@@ -29,25 +29,9 @@ class App extends Component {
       })
   }
 
-  render() {
-      return (
-        <main className="App">
-          <BrowserRouter>
-            <Route path='/login'>
-              <Header handleClick={this.handleClick}/>
-              <Login />
-            </Route>
-            <Route path='/'>
-              <Header handleClick={this.handleClick}/>
-              {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-              <CardSection allMovies={this.state.movies} />
-              {/* // {this.state.user.name && <CardSection allMovies={this.state.movies} /> } */}
-              {this.state.user.name && <Login className="hidden"/>}
-            </Route>
-          </BrowserRouter>
-        </main>
-      )
-    };
+  handleClick = () => {
+    this.setState({willLogIn: true})
+  }
 
   getUser = (username, password)  => {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
@@ -68,6 +52,16 @@ class App extends Component {
         this.setState({error: 'Please check your login information'})
       })
   }
+
+  render() {
+    return (
+      <main className="App">
+      <Header handleClick={this.handleClick}/>
+      {this.state.willLogIn ? <Login /> : <CardSection allMovies={this.state.movies} />}
+      {this.state.error && <p className='error-msg'>{this.state.error}</p>}
+      </main>
+    )
+  };
 
   // App.PropTypes = {
   //   movies: PropTypes.array,
