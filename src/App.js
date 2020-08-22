@@ -32,6 +32,7 @@ class App extends Component {
   render() {
       return (
         <main className="App">
+          <Header />
           <BrowserRouter>
             <Route path='/login'>
               <Header handleClick={this.handleClick}/>
