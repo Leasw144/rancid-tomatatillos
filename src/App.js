@@ -32,17 +32,18 @@ class App extends Component {
   render() {
       return (
         <main className="App">
-          <Header />
           <BrowserRouter>
             <Route path='/login'>
               <Header handleClick={this.handleClick}/>
               <Login />
             </Route>
-              <button type='button' onClick={this.handleClick}> Click Me</button>
+            <Route path='/'>
+              <Header handleClick={this.handleClick}/>
               {this.state.error && <p className='error-msg'>{this.state.error}</p>}
               <CardSection allMovies={this.state.movies} />
               {/* // {this.state.user.name && <CardSection allMovies={this.state.movies} /> } */}
               {this.state.user.name && <Login className="hidden"/>}
+            </Route>
           </BrowserRouter>
         </main>
       )
