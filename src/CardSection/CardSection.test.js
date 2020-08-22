@@ -6,7 +6,7 @@ import App from '../App'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 describe('CardSection', () => {
-  let movies, titleOne, titleTwo, titleThree, ratingOne, ratingTwo, ratingThree;
+  let movies, titleOne, titleTwo, titleThree, movieContainer;
   beforeEach(() => {
     movies = [
       {
@@ -43,9 +43,10 @@ describe('CardSection', () => {
     titleTwo = screen.getByText("Archive")
     titleThree = screen.getByText("Akira")
 
-    imageOne = screen.getByAltText('Greenland')
-    imageTwo = screen.getByAltText('Ar')
-    imageThree = screen.getByAltText('Greenland')
+    // movieContainer = screen.getByText('MovieCard')
+    // imageOne = screen.getByAltText('Greenland')
+    // imageTwo = screen.getByAltText('Ar')
+    // imageThree = screen.getByAltText('Greenland')
 
 
   })
@@ -58,10 +59,9 @@ describe('CardSection', () => {
 
   })
 
-  it('should contain the ratings of all of the movies', () => {
-
-  expect(ratingOne).toEqual(9)
-  })
-
+  // it('can view all of the movies when app loads',() => {
+    
+  //   expect(movieContainer).toBeInTheDocument()
+  // })
 
 })
