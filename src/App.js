@@ -34,7 +34,6 @@ class App extends Component {
 
   handleClick = () => {
     this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
-
   }
 
   logoutUser = () => {
