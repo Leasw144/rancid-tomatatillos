@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const authorizeUser = (username, password) => {
+export function authorizeUser(username, password) {
   fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
     method: 'POST',
     headers: {
@@ -37,5 +37,16 @@ export function getRatings(id) {
     .catch(error => {
       console.log('Error fetching your ratings')
       this.setState({ error: 'We cannot find your ratings' })
+  })
+}
+
+export function findMovie(id) {
+  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+    .then(response => response.json())
+    .then(data => this.setState({movieInfo: data.movie}))
+    .catch(error => {
+      console.log('error Fetching Movie!')
+      this.setState({error: 'Your movie has not been found!'})
     })
+
 }

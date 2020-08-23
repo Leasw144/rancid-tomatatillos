@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import './App-resources/App.css';
-import Header from './Header/Header'
-import CardSection from './CardSection/CardSection'
-import './assets/tomato.jpg'
-import Login from './Login/Login'
-import { authorizeUser, getMovies, getRatings} from './APICalls'
 import PropTypes from 'prop-types'
 import {BrowserRouter, Route} from 'react-router-dom'
+import {authorizeUser, getMovies, findMovie, getRatings} from './APICalls'
+
+import Header from './Header/Header'
+import CardSection from './CardSection/CardSection'
+import DetailsPage from './DetailsPage/DetailsPage'
+import Login from './Login/Login'
+
+import './App-resources/App.css';
+import './assets/tomato.jpg'
 
 class App extends Component {
   constructor() {
@@ -17,10 +20,13 @@ class App extends Component {
       user:{},
       isLoggedIn: false,
       isLogInShowing: false,
-      userRatings:[]
+      userRatings:[],
+      isShowingDetails: false,
+      movieInfo: {}
     }
     this.getMovies = getMovies
-
+    this.authorizeUser = authorizeUser
+    this.findMovie = findMovie
   }
 
   componentDidMount() {
@@ -29,7 +35,6 @@ class App extends Component {
 
   handleClick = () => {
     this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
-
   }
 
   logoutUser = () => {
@@ -37,16 +42,62 @@ class App extends Component {
   }
 
   getUser = (username, password)  => {
-    authorizeUser(username, password)
-    getRatings(this.state.user.id)
+    // authorizeUser(username, password)
+    // getRatings(this.state.user.id)
+    this.authorizeUser(username, password)
+  }
+  
+  // showMovieDetails = () => {
+  //   this.setState(prevState => ({isShowingDetails: !prevState.isShowingDetails}))
+  // }
+
+  showInfo = (id) =>{
+    console.log('this function has been passed down successfully, bro', id)
+    this.setState(prevState => ({ isShowingDetails: !prevState.isShowingDetails }))
+    this.findMovie(id)
+  }
+  // Create a function in app that invokes our API to go to the movie
+  // Pass this function down to MovieCard
+  // then OnClick of the card, the id would be fed into the function which calls the fetch
+  // // the fetch resets the state
+  // Have conditional logic hear, where if the movieInfo state is truthy, render details page
+  // pass down movie info as prop to details page
+
+
+  stateHandler() {
+    // if the state has changed in any way, we want to render the appropriate component
+    if(this.state.isLogInShowing) {
+      return (
+        <Login getUser={this.getUser} /> 
+      ) 
+    } else if (this.state.movieInfo.id) {
+      return (
+        <DetailsPage movieInfo={this.state.movieInfo} resetter={this.resetState} />
+      )
+    } else if (this.state.error) {
+      return (
+        <p className='error-msg'>{this.state.error}</p>
+      )
+    }
+    return (
+      <CardSection allMovies={this.state.movies} showInfo={this.showInfo} />
+    )
+  }
+
+  resetState = () => {
+    console.log('this is this', this)
+    this.setState({isShowingDetails: false, movieInfo: {}})
+    
   }
 
   render() {
     return (
       <main className="App">
         <Header loginPage={this.handleClick} logoutUser={this.logoutUser} user={this.state.user}/>
-          {this.state.isLogInShowing ? <Login getUser={this.getUser} /> : <CardSection allMovies= {this.state.movies} />}
+          {this.stateHandler()}
+          {/* {this.state.isLogInShowing ? <Login getUser={this.getUser} /> : <CardSection allMovies= {this.state.movies} showInfo={this.showInfo}/>}
           {this.state.error && <p className='error-msg'>{this.state.error}</p>}
+          {this.state.isShowingDetails ? <DetailsPage movieInfo={this.state.movieInfo} /> : <CardSection allMovies={this.state.movies} showInfo={this.showInfo} />} */}
       </main>
     )
   };
