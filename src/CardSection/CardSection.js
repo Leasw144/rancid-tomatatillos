@@ -9,10 +9,12 @@ function CardSection(props) {
       return (
         <MovieCard
         key={movie.id}
+        id={movie.id}
         img={movie.poster_path}
         title={movie.title}
         releaseDate={movie.release_date}
         rating={movie.average_rating}
+        click={props.showInfo}
         />
       )
     })
