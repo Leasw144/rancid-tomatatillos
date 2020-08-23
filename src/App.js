@@ -70,7 +70,7 @@ class App extends Component {
       ) 
     } else if (this.state.isShowingDetails) {
       return (
-        <DetailsPage movieInfo={this.state.movieInfo} />
+        <DetailsPage movieInfo={this.state.movieInfo} resetter={this.resetState} />
       )
     } else if (this.state.error) {
       return (
@@ -80,6 +80,12 @@ class App extends Component {
     return (
       <CardSection allMovies={this.state.movies} showInfo={this.showInfo} />
     )
+  }
+
+  resetState = () => {
+    console.log('this is this', this)
+    this.setState({isShowingDetails: false, movieInfo: {}})
+    
   }
 
   render() {

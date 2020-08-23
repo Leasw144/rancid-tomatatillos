@@ -23,6 +23,7 @@ function DetailsPage(props) {
         {props.budget > 0 && <p> Budget: {props.budget}</p>}
         {props.revenue > 0 && <p> Revenue: {props.revenue}</p>}
         {props.tagline > 0 && <p> Budget: {props.tagline}</p>} */}
+        <button type='button' onClick={props.resetter}>Return to Home </button>
       </article>
       
     </section>
