@@ -4,7 +4,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import './assets/tomato.jpg'
 import Login from './Login/Login'
-import {authorizeUser, getMovies } from './APICalls'
+import { authorizeUser, getMovies, getRatings} from './APICalls'
 import PropTypes from 'prop-types'
 import {BrowserRouter, Route} from 'react-router-dom'
 
@@ -16,7 +16,8 @@ class App extends Component {
       error: '',
       user:{},
       isLoggedIn: false,
-      isLogInShowing: false
+      isLogInShowing: false,
+      userRatings:[]
     }
     this.getMovies = getMovies
 
@@ -37,6 +38,7 @@ class App extends Component {
 
   getUser = (username, password)  => {
     authorizeUser(username, password)
+    getRatings(this.state.user.id)
   }
 
   render() {
