@@ -15,7 +15,7 @@ class App extends Component {
       error: '',
       user:{},
       isLoggedIn: false,
-      willLogIn: false
+      isLogInShowing: false
     }
   }
 
@@ -29,23 +29,9 @@ class App extends Component {
       })
   }
 
-  render() {
-      return (
-        <main className="App">
-          <BrowserRouter>
-            <Route path='/login'>
-              <Header handleClick={this.handleClick}/>
-              <Login />
-            </Route>
-              <button type='button' onClick={this.handleClick}> Click Me</button>
-              {this.state.error && <p className='error-msg'>{this.state.error}</p>}
-              <CardSection allMovies={this.state.movies} />
-              {/* // {this.state.user.name && <CardSection allMovies={this.state.movies} /> } */}
-              {this.state.user.name && <Login className="hidden"/>}
-          </BrowserRouter>
-        </main>
-      )
-    };
+  handleClick = () => {
+    this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
+  }
 
   getUser = (username, password)  => {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
@@ -56,16 +42,25 @@ class App extends Component {
       body: JSON.stringify({
         email: username,
         password: password,
-
       })
     })
       .then(response => response.json())
-      .then(data => this.setState({user: data.user}))
+      .then(data => this.setState({user: data.user, isLogInShowing: false}))
       .catch(error => {
         console.log('Error fetching user')
         this.setState({error: 'Please check your login information'})
       })
   }
+
+  render() {
+    return (
+      <main className="App">
+      <Header handleClick={this.handleClick} user={this.state.user}/>
+      {this.state.isLogInShowing ? <Login getUser={this.getUser} /> : <CardSection allMovies={this.state.movies} />}
+      {this.state.error && <p className='error-msg'>{this.state.error}</p>}
+      </main>
+    )
+  };
 
   // App.PropTypes = {
   //   movies: PropTypes.array,
