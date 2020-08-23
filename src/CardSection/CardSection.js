@@ -3,10 +3,10 @@ import MovieCard from '../MovieCard/MovieCard'
 import './CardSection.css'
 
 function CardSection(props) {
+  console.log('CardSection props', props)
 
   let movies;
   if (props.allMovies.length > 0) {
-    console.log(props)
     movies = props.allMovies.map(movie => {
       return (
         <MovieCard
@@ -16,6 +16,7 @@ function CardSection(props) {
         title={movie.title}
         releaseDate={movie.release_date}
         rating={movie.average_rating}
+        click={props.showInfo}
         />
       )
     })
