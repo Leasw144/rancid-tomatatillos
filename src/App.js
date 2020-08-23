@@ -68,7 +68,7 @@ class App extends Component {
       return (
         <Login getUser={this.getUser} /> 
       ) 
-    } else if (this.state.isShowingDetails) {
+    } else if (this.state.movieInfo.id) {
       return (
         <DetailsPage movieInfo={this.state.movieInfo} resetter={this.resetState} />
       )
