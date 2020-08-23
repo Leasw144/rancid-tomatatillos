@@ -15,7 +15,7 @@ class App extends Component {
       error: '',
       user:{},
       isLoggedIn: false,
-      willLogIn: false
+      isLogInShowing: false
     }
   }
 
@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   handleClick = () => {
-    this.setState(prevState => ({willLogIn: !prevState.willLogIn}))
+    this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
   }
 
   getUser = (username, password)  => {
@@ -45,7 +45,7 @@ class App extends Component {
       })
     })
       .then(response => response.json())
-      .then(data => this.setState({user: data.user, willLogIn: false}))
+      .then(data => this.setState({user: data.user, isLogInShowing: false}))
       .catch(error => {
         console.log('Error fetching user')
         this.setState({error: 'Please check your login information'})
@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <main className="App">
       <Header handleClick={this.handleClick} user={this.state.user}/>
-      {this.state.willLogIn ? <Login getUser={this.getUser} /> : <CardSection allMovies={this.state.movies} />}
+      {this.state.isLogInShowing ? <Login getUser={this.getUser} /> : <CardSection allMovies={this.state.movies} />}
       {this.state.error && <p className='error-msg'>{this.state.error}</p>}
       </main>
     )
