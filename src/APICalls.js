@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const authorizeUser = (username, password) => {
+export function authorizeUser(username, password) {
   fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
     method: 'POST',
     headers: {
