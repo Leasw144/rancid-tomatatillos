@@ -42,7 +42,6 @@ class App extends Component {
       body: JSON.stringify({
         email: username,
         password: password,
-
       })
     })
       .then(response => response.json())
