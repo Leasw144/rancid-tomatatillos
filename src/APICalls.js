@@ -20,7 +20,7 @@ export const authorizeUser = (username, password) => {
 
 }
 
-export const getMovies = () =>{
+export function getMovies() {
   fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
   .then(response => response.json())
   .then(data => this.setState({movies: data.movies}))

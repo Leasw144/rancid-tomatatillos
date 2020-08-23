@@ -18,16 +18,17 @@ class App extends Component {
       isLoggedIn: false,
       isLogInShowing: false
     }
-    this.componentDidMount = this.componentDidMount.bind(this)
+    this.getMovies = getMovies
+
   }
 
   componentDidMount() {
-   getMovies()
+   this.getMovies()
   }
 
   handleClick = () => {
     this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
-   
+
   }
 
   logoutUser = () => {
