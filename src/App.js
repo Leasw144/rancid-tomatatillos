@@ -46,7 +46,7 @@ class App extends Component {
       })
     })
       .then(response => response.json())
-      .then(data => this.setState({user: data.user}))
+      .then(data => this.setState({user: data.user, willLogIn: false}))
       .catch(error => {
         console.log('Error fetching user')
         this.setState({error: 'Please check your login information'})
