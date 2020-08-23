@@ -12,7 +12,7 @@ function Header(props) {
         </h1>
         {props.user.name && <h2>Welcome {props.user.name}!</h2>}
       </div>
-      <button onClick={props.handleClick} type='button' className='login-page-button'>Log In</button>
+  <button onClick={props.user.name ? props.logoutUser : props.loginPage} type='button' className='login-page-button'>Log {props.user.name ? 'out' : 'in'}</button>
     </header>
   )
 }

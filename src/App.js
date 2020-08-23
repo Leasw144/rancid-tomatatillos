@@ -4,6 +4,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import './assets/tomato.jpg'
 import Login from './Login/Login'
+import {authorizeUser, getMovies } from './APICalls'
 import PropTypes from 'prop-types'
 import {BrowserRouter, Route} from 'react-router-dom'
 
@@ -17,47 +18,32 @@ class App extends Component {
       isLoggedIn: false,
       isLogInShowing: false
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => response.json())
-      .then(data => this.setState({movies: data.movies}))
-      .catch(error => {
-        console.log('Error fetching all movies')
-        this.setState({ error: 'An error has occured'})
-      })
+   getMovies()
   }
 
   handleClick = () => {
     this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
+   
+  }
+
+  logoutUser = () => {
+    this.setState(prevState => ({isLoggedIn: !prevState.isLoggedIn, user:{}}))
   }
 
   getUser = (username, password)  => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: username,
-        password: password,
-      })
-    })
-      .then(response => response.json())
-      .then(data => this.setState({user: data.user, isLogInShowing: false}))
-      .catch(error => {
-        console.log('Error fetching user')
-        this.setState({error: 'Please check your login information'})
-      })
+    authorizeUser(username, password)
   }
 
   render() {
     return (
       <main className="App">
-      <Header handleClick={this.handleClick} user={this.state.user}/>
-      {this.state.isLogInShowing ? <Login getUser={this.getUser} /> : <CardSection allMovies={this.state.movies} />}
-      {this.state.error && <p className='error-msg'>{this.state.error}</p>}
+        <Header loginPage={this.handleClick} logoutUser={this.logoutUser} user={this.state.user}/>
+          {this.state.isLogInShowing ? <Login getUser={this.getUser} /> : <CardSection allMovies= {this.state.movies} />}
+          {this.state.error && <p className='error-msg'>{this.state.error}</p>}
       </main>
     )
   };

@@ -4,7 +4,7 @@ import './MovieCard.css'
 
 function MovieCard(props) {
     return (
-      <article className='MovieCard'>
+      <article className='MovieCard' id={props.key}>
         <img src={props.img} alt={props.title}/>
         <p><span>Title:</span> {props.title}</p>
         <p><span>Average Rating:</span> {props.rating}</p>
