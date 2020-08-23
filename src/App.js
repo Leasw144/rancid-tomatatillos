@@ -19,7 +19,7 @@ class App extends Component {
       isLogInShowing: false
     }
     this.getMovies = getMovies
-
+    this.authorizeUser = authorizeUser
   }
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   getUser = (username, password)  => {
-    authorizeUser(username, password)
+    this.authorizeUser(username, password)
   }
 
   render() {
