@@ -14,24 +14,15 @@ describe('MovieCard', () => {
     />)
     })
 
-    // const movieTitle = screen.getByText('Akira');
+    const movieTitle = screen.getByText('Akira');
     // const movieReleaseDate = screen.getByText('1988/07/16');
     // const movieImg = screen.getByText('imgUrl@somesite.com')
     // const movieRating = screen.getByText(9)
 
-    // expect(movieTitle).toBeInTheDocument();
+    expect(movieTitle).toBeInTheDocument();
     // expect(movieReleaseDate).toBeInTheDocument();
     // expect(movieImg).toBeInTheDocument();
     // expect(movieRating).toBeInTheDocument();
     // expect(screen.getByText('Akira')).toBeInTheDocument();
-
-
-
-
-
-
-
-
-
 
 });

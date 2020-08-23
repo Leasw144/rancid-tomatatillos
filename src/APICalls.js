@@ -30,6 +30,16 @@ export function getMovies() {
   })
 }
 
+// export function getRatings(id) {
+//   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`)
+//     .then(response => response.json())
+//     .then(data => this.setState({ userRatings: data.ratings }))
+//     .catch(error => {
+//       console.log('Error fetching your ratings')
+//       this.setState({ error: 'We cannot find your ratings' })
+//   })
+// }
+
 export function findMovie(id) {
   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
     .then(response => response.json())
