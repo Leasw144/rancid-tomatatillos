@@ -4,6 +4,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import './assets/tomato.jpg'
 import Login from './Login/Login'
+import {authorizeUser} from './APICalls'
 import PropTypes from 'prop-types'
 import {BrowserRouter, Route} from 'react-router-dom'
 
@@ -39,22 +40,7 @@ class App extends Component {
   }
 
   getUser = (username, password)  => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: username,
-        password: password,
-      })
-    })
-      .then(response => response.json())
-      .then(data => this.setState({user: data.user, isLogInShowing: false}))
-      .catch(error => {
-        console.log('Error fetching user')
-        this.setState({error: 'Please check your login information'})
-      })
+    authorizeUser(username, password)
   }
 
   render() {
