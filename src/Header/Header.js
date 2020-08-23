@@ -6,9 +6,12 @@ function Header(props) {
   return (
     <header>
       <img className= 'tomato' src={tomato} alt='tomato' />
-      <h1>
-        Rancid Tomatatillos
-      </h1>
+      <div>
+        <h1>
+          Rancid Tomatatillos
+        </h1>
+        {props.user.name && <h2>Welcome {props.user.name}!</h2>}
+      </div>
       <button onClick={props.handleClick} type='button' className='login-page-button'>Log In</button>
     </header>
   )

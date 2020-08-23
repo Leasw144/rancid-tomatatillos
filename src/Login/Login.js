@@ -12,7 +12,7 @@ class Login extends Component {
     }
 
     this.getUser = props.getUser;
-
+    console.log('login', props)
   }
 
   handleChange = event => {

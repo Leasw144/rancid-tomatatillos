@@ -55,8 +55,8 @@ class App extends Component {
   render() {
     return (
       <main className="App">
-      <Header handleClick={this.handleClick}/>
-      {this.state.willLogIn ? <Login /> : <CardSection allMovies={this.state.movies} />}
+      <Header handleClick={this.handleClick} user={this.state.user}/>
+      {this.state.willLogIn ? <Login getUser={this.getUser} /> : <CardSection allMovies={this.state.movies} />}
       {this.state.error && <p className='error-msg'>{this.state.error}</p>}
       </main>
     )
