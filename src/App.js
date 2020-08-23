@@ -4,7 +4,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import './assets/tomato.jpg'
 import Login from './Login/Login'
-import {authorizeUser} from './APICalls'
+import {authorizeUser, getMovies } from './APICalls'
 import PropTypes from 'prop-types'
 import {BrowserRouter, Route} from 'react-router-dom'
 
@@ -18,16 +18,11 @@ class App extends Component {
       isLoggedIn: false,
       isLogInShowing: false
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => response.json())
-      .then(data => this.setState({movies: data.movies}))
-      .catch(error => {
-        console.log('Error fetching all movies')
-        this.setState({ error: 'An error has occured'})
-      })
+   getMovies()
   }
 
   handleClick = () => {
