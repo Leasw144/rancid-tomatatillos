@@ -29,3 +29,14 @@ export function getMovies() {
     this.setState({ error: 'An error has occurred'})
   })
 }
+
+export function findMovie(id) {
+  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+    .then(response => response.json())
+    .then(data => this.setState({movieInfo: data.movie}))
+    .catch(error => {
+      console.log('error Fetching Movie!')
+      this.setState({error: 'Your movie has not been found!'})
+    })
+
+}
