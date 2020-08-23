@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   handleClick = () => {
-    this.setState({willLogIn: true})
+    this.setState(prevState => ({willLogIn: !prevState.willLogIn}))
   }
 
   getUser = (username, password)  => {
