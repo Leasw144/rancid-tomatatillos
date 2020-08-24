@@ -7,6 +7,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import DetailsPage from './DetailsPage/DetailsPage'
 import Login from './Login/Login'
+import moment from 'moment'
 
 import './App-resources/App.css';
 import './assets/tomato.jpg'
@@ -24,6 +25,7 @@ class App extends Component {
       isShowingDetails: false,
       movieInfo: {}
     }
+    console.log(moment().format("YYYY/MM/DD"))
     this.getMovies = getMovies
     this.authorizeUser = authorizeUser
     this.findMovie = findMovie
