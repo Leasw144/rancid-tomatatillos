@@ -1,5 +1,7 @@
 import React from 'react'
 import './DetailsPage.css'
+import NumericInput from 'react-numeric-input';
+
 
 function DetailsPage(props) {
   console.log('Details Page props', props)
@@ -17,6 +19,11 @@ function DetailsPage(props) {
         {movie.budget > 0 && <p> Budget: {movie.budget}</p>}
         {movie.revenue > 0 && <p> Revenue: {movie.revenue}</p>}
         {movie.tagline && <p> Budget: {movie.tagline}</p>}
+       <form>
+          <NumericInput min={1} max={10} value={0}/>
+          <button type="button" >Submit Rating</button>
+       </form>
+
         <button type='button' onClick={props.resetter}>Return to Home </button>
       </article>
       
