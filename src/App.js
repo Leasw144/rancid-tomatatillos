@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 // import {BrowserRouter, Route} from 'react-router-dom'
-import {authorizeUser, getMovies, findMovie, getRatings} from './APICalls'
+import {authorizeUser, getMovies, findMovie, getRatings, postRating} from './APICalls'
 
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
@@ -22,7 +22,7 @@ class App extends Component {
       user:{},
       isLoggedIn: false,
       isLogInShowing: false,
-      // userRatings:[],
+      userRatings:[],
       isShowingDetails: false,
       movieInfo: {}
     }
@@ -30,6 +30,7 @@ class App extends Component {
     this.getMovies = getMovies
     this.authorizeUser = authorizeUser
     this.findMovie = findMovie
+    this.postRating = postRating
   }
 
   componentDidMount() {
@@ -47,6 +48,13 @@ class App extends Component {
   getUser = (username, password)  => {
     this.authorizeUser(username, password)
   }
+
+  postUserRating = (userId, movieId, userRating) => {
+    this.postRating(userId, movieId, userRating)
+    // console.log('userid', userId)
+    // console.log('movieId', movieId)
+    // console.log('userRating', userRating)
+  }
   
   showInfo = (id) =>{
     console.log('this function has been passed down successfully, bro', id)
@@ -61,7 +69,7 @@ class App extends Component {
       ) 
     } else if (this.state.movieInfo.id) {
       return (
-        <DetailsPage movieInfo={this.state.movieInfo} resetter={this.resetState} />
+        <DetailsPage movieInfo={this.state.movieInfo} userId= {this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating}/>
       )
     } else if (this.state.error) {
       return (
