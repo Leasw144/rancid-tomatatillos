@@ -29,7 +29,7 @@ class Login extends Component {
     return (
       <section className='Login'>
         <form className='form-section'>
-          <label for="username">Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type='text'
             name='username'
@@ -37,7 +37,7 @@ class Login extends Component {
             onChange = {this.handleChange}
           />
 
-          <label for="password">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type='password'
             name='password'
@@ -45,7 +45,7 @@ class Login extends Component {
             onChange = {this.handleChange}
           />
           { this.state.error && <p className='error-msg'>{this.state.userError}</p> }
-          <button onClick = { event => this.handleLogIn(event)}>Submit</button>
+          <button onClick={ event => this.handleLogIn(event)}>Submit</button>
         </form>
       </section>
       )
