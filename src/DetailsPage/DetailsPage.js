@@ -23,7 +23,7 @@ class DetailsPage extends Component {
     return (
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
-          <img className= 'backdrop-img' src={movie.backdrop_path} alt={movie.title} />
+          <img className='backdrop-img' src={movie.backdrop_path} alt={movie.title} />
           {movie.tagline && <p className='tag-line'>{movie.tagline}</p>}
         </section>
         <article className='movie-details'>
