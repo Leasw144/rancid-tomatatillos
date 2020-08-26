@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './Login.css';
 import App from '../App';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class Login extends Component {
   constructor(props){
@@ -24,12 +24,17 @@ class Login extends Component {
   handleLogIn = (event) => {
     event.preventDefault();
     this.getUser(this.state.username, this.state.password);
+    if(this.state.username) {
+      this.setState({toCardSection: true})
+    }
     console.log(this.getUser)
   }
 
   render() {
     if (this.state.toCardSection === true) {
-      return <Redirect to='/' />
+      return (
+        <Redirect to='/movies' />
+      )
     }
     return (
       <section className='Login'>
