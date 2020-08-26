@@ -26,7 +26,7 @@ class App extends Component {
       isShowingDetails: false,
       movieInfo: {}
     }
-    console.log(moment().format("YYYY/MM/DD"))
+    // console.log(moment('2020/12/12').format("DD/MM/YYYY"))
     this.getMovies = getMovies
     this.authorizeUser = authorizeUser
     this.findMovie = findMovie
@@ -82,7 +82,7 @@ class App extends Component {
   }
 
   resetState = () => {
-    console.log('this is this', this)
+    // console.log('this is this', this)
     this.setState({isShowingDetails: false, movieInfo: {}})
     
   }

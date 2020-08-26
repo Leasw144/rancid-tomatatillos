@@ -22,18 +22,20 @@ class DetailsPage extends Component {
     
     return (
       <section className='DetailsPage'>
-        <h1 className='movie-title'>{movie.title}</h1>
-        <img src={movie.backdrop_path} alt={movie.title} />
-        <article>
+        <section className='backdrop-parent'>
+          <img className= 'backdrop-img' src={movie.backdrop_path} alt={movie.title} />
+          {movie.tagline && <p className='tag-line'>{movie.tagline}</p>}
+        </section>
+        <article className='movie-details'>
+          <h1 className='movie-title'>{movie.title}</h1>
           <h2>Description:</h2>
-          {movie.overview && <p> overview: {movie.overview}</p>}
-          {movie.release_date && <p> Release Date: {movie.release_date}</p>}
-          {movie.runtime > 0 && <p> runtime: {movie.runtime}</p>}
-          {movie.average_rating > 0 && <p> Average Rating: {movie.average_rating}</p>}
-          {movie.budget > 0 && <p> Budget: {movie.budget}</p>}
-          {movie.revenue > 0 && <p> Revenue: {movie.revenue}</p>}
-          {movie.tagline && <p> Budget: {movie.tagline}</p>}
-         <form>
+          {movie.overview && <p><span>Overview:</span> {movie.overview}</p>}
+          {movie.release_date && <p><span>Release Date:</span> {movie.release_date}</p>}
+          {movie.runtime > 0 && <p><span>Runtime:</span> {movie.runtime}</p>}
+          {movie.average_rating > 0 && <p><span>Average Rating:</span> {movie.average_rating.toFixed(1)}</p>}
+          {movie.budget > 0 && <p><span>Budget:</span> {movie.budget}</p>}
+          {movie.revenue > 0 && <p><span>Revenue:</span> {movie.revenue}</p>}
+         <form className='rating-form'>
             {/* <NumericInput  min={1} max={10} value={0}/> */}
             <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
               {ratingOptions}
@@ -41,7 +43,7 @@ class DetailsPage extends Component {
             <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.props.movieInfo.id, this.state.userRating)}>Submit Rating</button>
          </form>
   
-          <button type='button' onClick={this.props.resetter}>Return to Home </button>
+          <button className='home-btn' type='button' onClick={this.props.resetter}>Return to Home </button>
         </article>
         
       </section>
