@@ -95,7 +95,7 @@ class App extends Component {
           {/* {this.stateHandler()} */}
         <Switch>
         
-          <Route exact path='/movies' render={() => <CardSection allMovies={this.state.movies} showInfo={this.showInfo}/>}/>
+          <Route exact path='/' render={() => <CardSection allMovies={this.state.movies} showInfo={this.showInfo}/>}/>
           <Route exact path='/login' render={() => <Login getUser={this.getUser} />}/>
 
           <Route exact path='/movie/:id' 

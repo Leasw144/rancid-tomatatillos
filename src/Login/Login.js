@@ -33,7 +33,7 @@ class Login extends Component {
   render() {
     if (this.state.toCardSection === true) {
       return (
-        <Redirect to='/movies' />
+        <Redirect to='/' />
       )
     }
     return (
