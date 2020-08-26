@@ -1,0 +1,60 @@
+.movie-title {
+  font-size:24px;
+}
+
+.DetailsPage {
+  display: flex;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.movie-details {
+  color: #E8EDDF;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.movie-details p {
+  font-size: 16px
+}
+.rating-form {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 50%;
+  padding-left: 6rem;
+  margin-top: 6rem;
+}
+
+.rating-form select {
+  margin-left: 4rem;
+  width: 4rem;
+  margin-bottom: 1rem;
+}
+
+.rating-form button {
+  width: 12rem;
+  margin-bottom: 1rem;
+  padding: .4rem 1rem;
+  color: #E8EDDF;
+  background: #9A031E;
+}
+
+.home-btn {
+  width: 12rem;
+  margin-left: 6rem;
+  padding: .4rem 1rem;
+  background: #C9CBA3;
+}
+
+.backdrop-img {
+  width: 66vw;
+}
+
+.tag-line {
+  color: #E8EDDF;
+  font-size: 18px;
+}
