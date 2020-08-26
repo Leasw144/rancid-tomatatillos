@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Header.css'
 import tomato from '../assets/tomato.jpg'
-import { Link } from 'react-browser-router'
+import { Link, NavLink } from 'react-browser-router'
 import Login from '../Login/Login'
 
 function Header(props) {
@@ -14,7 +14,7 @@ function Header(props) {
         </h1>
         {props.user.name && <h2>Welcome {props.user.name}!</h2>}
       </div>
-      <Link to='/login' render={Login}>Log {props.user.name ? 'out' : 'in'}</Link>
+      <NavLink to='/login' render={Login}>Log {props.user.name ? 'out' : 'in'}</NavLink>
     </header>
   )
 }
