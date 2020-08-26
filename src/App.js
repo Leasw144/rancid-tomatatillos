@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-// import {BrowserRouter, Route} from 'react-router-dom'
+import { Route, Switch, render, match} from 'react-router-dom'
 import {authorizeUser, getMovies, findMovie, getRatings, postRating} from './APICalls'
+
 
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
@@ -62,24 +63,24 @@ class App extends Component {
     this.findMovie(id)
   }
 
-  stateHandler() {
-    if(this.state.isLogInShowing) {
-      return (
-        <Login getUser={this.getUser} /> 
-      ) 
-    } else if (this.state.movieInfo.id) {
-      return (
-        <DetailsPage movieInfo={this.state.movieInfo} userId= {this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating}/>
-      )
-    } else if (this.state.error) {
-      return (
-        <p className='error-msg'>{this.state.error}</p>
-      )
-    }
-    return (
-      <CardSection allMovies={this.state.movies} showInfo={this.showInfo} />
-    )
-  }
+  // stateHandler() {
+  //   if(this.state.isLogInShowing) {
+  //     return (
+  //       <Login getUser={this.getUser} /> 
+  //     ) 
+  //   } else if (this.state.movieInfo.id) {
+  //     return (
+  //       <DetailsPage movieInfo={this.state.movieInfo} userId= {this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating}/>
+  //     )
+  //   } else if (this.state.error) {
+  //     return (
+  //       <p className='error-msg'>{this.state.error}</p>
+  //     )
+  //   }
+  //   return (
+  //     <CardSection allMovies={this.state.movies} showInfo={this.showInfo} />
+  //   )
+  // }
 
   resetState = () => {
     // console.log('this is this', this)
@@ -91,7 +92,23 @@ class App extends Component {
     return (
       <main className="App">
         <Header loginPage={this.handleClick} logoutUser={this.logoutUser} user={this.state.user}/>
-          {this.stateHandler()}
+          {/* {this.stateHandler()} */}
+        <Switch>
+        
+          <Route exact path='/movies' render={() => <CardSection allMovies={this.state.movies} showInfo={this.showInfo}/>}/>
+          <Route exact path='/login' render={() => <Login getUser={this.getUser} />}/>
+
+          <Route exact path='/movie/:id' 
+            render={({match}) => {
+              const {id} =match.params
+              // const movie;
+              return (
+                <DetailsPage {...this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />
+              )
+            }}
+          />
+        </Switch>
+
       </main>
     )
   };
