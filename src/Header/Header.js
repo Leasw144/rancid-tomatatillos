@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Header.css'
 import tomato from '../assets/tomato.jpg'
+import { Link } from 'react-browser-router'
+import Login from '../Login/Login'
 
 function Header(props) {
   return (
@@ -12,7 +14,7 @@ function Header(props) {
         </h1>
         {props.user.name && <h2>Welcome {props.user.name}!</h2>}
       </div>
-  <button onClick={props.user.name ? props.logoutUser : props.loginPage} type='button' className='login-page-button'>Log {props.user.name ? 'out' : 'in'}</button>
+      <Link to='/login' render={Login}>Log {props.user.name ? 'out' : 'in'}</Link>
     </header>
   )
 }
