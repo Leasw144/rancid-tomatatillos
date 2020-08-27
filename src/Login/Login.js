@@ -23,20 +23,19 @@ class Login extends Component {
 
   handleLogIn = (event) => {
     event.preventDefault();
-    this.props.getUser(this.state.username, this.state.password);
-    
-    // if (this.props.user.name) {
-    //   this.setState({toCardSection: true})
-    //   console.log('ourState', this.state)
-    // }
+    this.getUser(this.state.username, this.state.password);
+    if (this.props.user.name) {
+      this.setState({toCardSection: true})
+      console.log('ourState', this.state)
+    }
   }
 
   render() {
-    // if (this.state.toCardSection === true) {
-    //   return (
-    //     <Redirect to='/' />
-    //   )
-    // }
+    if (this.state.toCardSection === true) {
+      return (
+        <Redirect to='/' />
+      )
+    }
     return (
       <section className='Login'>
         <form className='form-section'>

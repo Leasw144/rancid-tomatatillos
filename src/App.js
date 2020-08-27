@@ -19,8 +19,8 @@ class App extends Component {
       movies: [],
       error: '',
       user:{},
-      isLoggedIn: false,
-      isLogInShowing: false,
+      // isLoggedIn: false,
+      // isLogInShowing: false,
       userRatings:[],
       isShowingDetails: false,
       movieInfo: {}
@@ -45,14 +45,14 @@ class App extends Component {
   //   this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
   // }
 
-  logoutUser = () => {
-    this.setState(prevState => ({isLoggedIn: !prevState.isLoggedIn, user:{}}))
-  }
+  // logoutUser = () => {
+  //   this.setState(prevState => ({isLoggedIn: !prevState.isLoggedIn, user:{}}))
+  // }
 
   getUser = (username, password)  => {
     this.authorizeUser(username, password)
     .then(data => {
-      this.setState({user: data.user, isLogInShowing: false})
+      this.setState({user: data.user})
     })
     .catch(error => {
       console.log('Error fetching user')
@@ -115,7 +115,7 @@ class App extends Component {
     console.log('movieInfo', this.state.movieInfo)
     return (
       <main className="App">
-        <Header loginPage={this.handleClick} logoutUser={this.logoutUser} user={this.state.user}/>
+        <Header user={this.state.user}/>
           {/* {this.stateHandler()} */}
         <Switch>
         
