@@ -35,8 +35,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('user', this.state.user)
-   this.getMovies()
+    this.getMovies()
+    .then(data => this.setState({movies: data.movies}))
+    .catch(error => {
+      console.log('Error fetching all movies')
+      this.setState({ error: 'An error has occurred'})
+    })
   }
 
   handleClick = () => {
@@ -58,15 +62,22 @@ class App extends Component {
 
   postUserRating = (userId, movieId, userRating) => {
     this.postRating(userId, movieId, userRating)
-    // console.log('userid', userId)
-    // console.log('movieId', movieId)
-    // console.log('userRating', userRating)
+    .then(data => this.setState({userRatings: data.userRating}))
+    .catch(error => {
+      console.log('Error fetching user')
+      this.setState({error: 'Please check your login information'})
+    })
   }
   
   showInfo = (id) =>{
     console.log('this function has been passed down successfully, bro', id)
     this.setState(prevState => ({ isShowingDetails: !prevState.isShowingDetails }))
     this.findMovie(id)
+    .then(data => this.setState({movieInfo: data.movie}))
+    .catch(error => {
+      console.log('error Fetching Movie!')
+      this.setState({error: 'Your movie has not been found!'})
+    })
   }
 
   // stateHandler() {
