@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import { Route, Switch, render, match} from 'react-router-dom'
 import {authorizeUser, getMovies, findMovie, getRatings, postRating} from './APICalls'
 
-
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import DetailsPage from './DetailsPage/DetailsPage'
 import Login from './Login/Login'
 // import moment from 'moment'
-
 
 import './App-resources/App.css';
 import './assets/tomato.jpg'
@@ -57,6 +55,7 @@ class App extends Component {
     .catch(error => {
       console.log('Error fetching user')
       this.setState({error: 'Please check your login information'})
+      console.log('this.state.error in App', this.state.error)
     })
   }
 

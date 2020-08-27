@@ -24,10 +24,16 @@ class Login extends Component {
   handleLogIn = (event) => {
     event.preventDefault();
     this.getUser(this.state.username, this.state.password);
-    if(this.state.username) {
-      this.setState({toCardSection: true})
-    }
-    // console.log(this.getUser)
+    // if (this.state.username) {
+    //   this.setState({toCardSection: true})
+    // }
+    console.log('this.state.error in Login.js', this.state.error)
+    if (this.state.error) {
+      console.log('error in if condition')
+    } 
+    // else {
+    //   this.setState({toCardSection: true})
+    // }
   }
 
   render() {
