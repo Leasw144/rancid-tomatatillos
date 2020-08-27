@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import './Login.css';
 import App from '../App';
+import { Redirect, Link } from 'react-router-dom'
 
 class Login extends Component {
   constructor(props){
@@ -8,7 +9,8 @@ class Login extends Component {
     this.state = {
     username:'',
     password: '',
-    error: ''
+    error: '',
+    toCardSection: false
     }
 
     this.getUser = props.getUser;
@@ -22,10 +24,18 @@ class Login extends Component {
   handleLogIn = (event) => {
     event.preventDefault();
     this.getUser(this.state.username, this.state.password);
+    if(this.state.username) {
+      this.setState({toCardSection: true})
+    }
     console.log(this.getUser)
   }
 
   render() {
+    if (this.state.toCardSection === true) {
+      return (
+        <Redirect to='/' />
+      )
+    }
     return (
       <section className='Login'>
         <form className='form-section'>
@@ -45,7 +55,7 @@ class Login extends Component {
             placeholder='password'
             value={this.state.password}
             onChange = {this.handleChange}
-          />
+          /> 
           { this.state.error && <p className='error-msg'>{this.state.userError}</p> }
           <button onClick={ event => this.handleLogIn(event)}>Submit</button>
         </form>
