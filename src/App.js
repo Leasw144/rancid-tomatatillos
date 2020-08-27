@@ -41,9 +41,9 @@ class App extends Component {
     })
   }
 
-  handleClick = () => {
-    this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
-  }
+  // handleClick = () => {
+  //   this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
+  // }
 
   logoutUser = () => {
     this.setState(prevState => ({isLoggedIn: !prevState.isLoggedIn, user:{}}))
@@ -123,9 +123,7 @@ class App extends Component {
           <Route exact path='/login' render={() => <Login getUser={this.getUser} error={this.state.error} user={this.state.user}/> }/>
 
           <Route exact path='/movies/:id' 
-            render={({match}) => {
-              const {id} =match.params
-              // const movie;
+            render={() => {
               return (
                 <DetailsPage movie={this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />
               )
