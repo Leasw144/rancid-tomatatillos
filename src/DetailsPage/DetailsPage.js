@@ -23,18 +23,18 @@ class DetailsPage extends Component {
     return (
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
-          <img className='backdrop-img' src={movie.backdrop_path} alt={movie.title} />
-          {movie.tagline && <p className='tag-line'>{movie.tagline}</p>}
+          <img className='backdrop-img' src={this.props.movie.backdrop_path} alt={this.props.movie.title} />
+          {this.props.movie.tagline && <p className='tag-line'>{this.props.movie.tagline}</p>}
         </section>
         <article className='movie-details'>
-          <h1 className='movie-title'>{movie.title}</h1>
+          <h1 className='movie-title'>{this.props.movie.title}</h1>
           <h2>Description:</h2>
-          {movie.overview && <p><span>Overview:</span> {movie.overview}</p>}
-          {movie.release_date && <p><span>Release Date:</span> {movie.release_date}</p>}
-          {movie.runtime > 0 && <p><span>Runtime:</span> {movie.runtime}</p>}
-          {movie.average_rating > 0 && <p><span>Average Rating:</span> {movie.average_rating.toFixed(1)}</p>}
-          {movie.budget > 0 && <p><span>Budget:</span> {movie.budget}</p>}
-          {movie.revenue > 0 && <p><span>Revenue:</span> {movie.revenue}</p>}
+          {this.props.movie.overview && <p><span>Overview:</span> {this.props.movie.overview}</p>}
+          {this.props.movie.release_date && <p><span>Release Date:</span> {this.props.movie.release_date}</p>}
+          {this.props.movie.runtime > 0 && <p><span>Runtime:</span> {this.props.movie.runtime}</p>}
+          {this.props.movie.average_rating > 0 && <p><span>Average Rating:</span> {this.props.movie.average_rating.toFixed(1)}</p>}
+          {this.props.movie.budget > 0 && <p><span>Budget:</span> {this.props.movie.budget}</p>}
+          {this.props.movie.revenue > 0 && <p><span>Revenue:</span> {this.props.movie.revenue}</p>}
          <form className='rating-form'>
             {/* <NumericInput  min={1} max={10} value={0}/> */}
             <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
@@ -52,3 +52,35 @@ class DetailsPage extends Component {
 }
 
 export default DetailsPage
+
+
+{/* <Route
+          path="/destinations/:destinationName"
+          render={({ match }) => {
+            return (
+              <div className="destinationDetails">
+                <Header />
+                <div className="bread-crumb-container">
+                  <Link className="breadCrumbLink" to="/destinations">
+                    <p className="main-bread-crumb">destinations </p>
+                  </Link>{" "}
+                  <p className="main-bread-crumb">
+                    > {match.params.destinationName}
+                  </p>
+                </div>
+                <div className="destination-details-container">
+                  <DestinationDetails
+                    selectedDestination={selectedDestination}
+                    setDestinations={setDestinations}
+                    destinations={destinations}
+                  />
+                </div>
+              </div>
+            );
+          }}
+        /> */}
+
+
+
+
+

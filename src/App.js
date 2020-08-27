@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import { Route, Switch, render, match} from 'react-router-dom'
+import { Route, Switch, render, match, Redirect} from 'react-router-dom'
 import {authorizeUser, getMovies, findMovie, getRatings, postRating} from './APICalls'
 
 import Header from './Header/Header'
@@ -51,12 +51,16 @@ class App extends Component {
 
   getUser = (username, password)  => {
     this.authorizeUser(username, password)
-    .then(data => this.setState({user: data.user, isLogInShowing: false}))
+    .then(data => {
+      this.setState({user: data.user, isLogInShowing: false})
+    })
     .catch(error => {
       console.log('Error fetching user')
       this.setState({error: 'Please check your login information'})
       console.log('this.state.error in App', this.state.error)
     })
+    return <Redirect to='/' />
+
   }
 
   postUserRating = (userId, movieId, userRating) => {
@@ -68,15 +72,18 @@ class App extends Component {
     })
   }
   
-  showInfo = (id) =>{
+  showInfo = async (id) =>{
     console.log('this function has been passed down successfully, bro', id)
     this.setState(prevState => ({ isShowingDetails: !prevState.isShowingDetails }))
-    this.findMovie(id)
-    .then(data => this.setState({movieInfo: data.movie}))
-    .catch(error => {
-      console.log('error Fetching Movie!')
-      this.setState({error: 'Your movie has not been found!'})
-    })
+    let data = await this.findMovie(id)
+    console.log('data1', data)
+    console.log('data.movie', data)
+    this.setState({movieInfo: data.movie})
+    return <Redirect to='/movies/{id}' />
+    // .catch(error => {
+    //   console.log('error Fetching Movie!')
+    //   this.setState({error: 'Your movie has not been found!'})
+    // })
   }
 
   // stateHandler() {
@@ -101,10 +108,11 @@ class App extends Component {
   resetState = () => {
     // console.log('this is this', this)
     this.setState({isShowingDetails: false, movieInfo: {}})
-    
+    return <Redirect to='/' />
   }
 
   render() {
+    console.log('movieInfo', this.state.movieInfo)
     return (
       <main className="App">
         <Header loginPage={this.handleClick} logoutUser={this.logoutUser} user={this.state.user}/>
@@ -112,14 +120,14 @@ class App extends Component {
         <Switch>
         
           <Route exact path='/' render={() => <CardSection allMovies={this.state.movies} showInfo={this.showInfo}/>}/>
-          <Route exact path='/login' render={() => <Login getUser={this.getUser} />}/>
+          <Route exact path='/login' render={() => <Login getUser={this.getUser} error={this.state.error} user={this.state.user}/> }/>
 
-          <Route exact path='/movie/:id' 
+          <Route exact path='/movies/:id' 
             render={({match}) => {
               const {id} =match.params
               // const movie;
               return (
-                <DetailsPage {...this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />
+                <DetailsPage movie={this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />
               )
             }}
           />

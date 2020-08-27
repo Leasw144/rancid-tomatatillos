@@ -9,7 +9,7 @@ class Login extends Component {
     this.state = {
     username:'',
     password: '',
-    error: '',
+    // error: '',
     toCardSection: false
     }
 
@@ -23,25 +23,20 @@ class Login extends Component {
 
   handleLogIn = (event) => {
     event.preventDefault();
-    this.getUser(this.state.username, this.state.password);
-    // if (this.state.username) {
+    this.props.getUser(this.state.username, this.state.password);
+    
+    // if (this.props.user.name) {
     //   this.setState({toCardSection: true})
-    // }
-    console.log('this.state.error in Login.js', this.state.error)
-    if (this.state.error) {
-      console.log('error in if condition')
-    } 
-    // else {
-    //   this.setState({toCardSection: true})
+    //   console.log('ourState', this.state)
     // }
   }
 
   render() {
-    if (this.state.toCardSection === true) {
-      return (
-        <Redirect to='/' />
-      )
-    }
+    // if (this.state.toCardSection === true) {
+    //   return (
+    //     <Redirect to='/' />
+    //   )
+    // }
     return (
       <section className='Login'>
         <form className='form-section'>
@@ -62,8 +57,8 @@ class Login extends Component {
             value={this.state.password}
             onChange = {this.handleChange}
           /> 
-          { this.state.error && <p className='error-msg'>{this.state.userError}</p> }
-          <button onClick={ event => this.handleLogIn(event)}>Submit</button>
+          { this.props.error && <p className='error-msg'>{this.props.error}</p> }
+          <button onClick={event => this.handleLogIn(event)}>Submit</button>
         </form>
       </section>
       )
