@@ -1,13 +1,17 @@
 import React from 'react';
 import DetailsPage from '../DetailsPage/DetailsPage';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('DetailsPage', () => {
   it.only('should display a movie page when a movie card is clicked', () => {
+    const myDetails = {
+      img:'img'
+    }
     const detailsPage = (
       <DetailsPage 
-        img='https://image.tmdb.org/t/p/original//qZ4NYuwME0j6QgJmIE6AZMgmCaj.jpg'
+        img='img'
+        alt= 'Akira'
         title='Akira'
         releaseDate='1988/07/16'
         runtime={124}
@@ -18,7 +22,7 @@ describe('DetailsPage', () => {
       />
       )
       const { getByText } = render(detailsPage);
-      const movieImg = screen.getByRole('img');
+      const movieImg = screen.getByAltText('Akira');
       const movieTitle = screen.getByText('Akira');
       const movieReleaseDate = screen.getByText('1988/07/16');
       const movieRunTime = screen.getByText('124', {exact: false})

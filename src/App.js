@@ -7,7 +7,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import DetailsPage from './DetailsPage/DetailsPage'
 import Login from './Login/Login'
-import moment from 'moment'
+// import moment from 'moment'
 
 
 import './App-resources/App.css';

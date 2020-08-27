@@ -2,7 +2,8 @@ import React from 'react';
 import { render, waitFor, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../App';
-
+import { authorizeUser } from '../APICalls';
+jest.mock('../APICalls')
 // import MovieCard from './MovieCard'
 
 describe('App', () => {
@@ -38,7 +39,15 @@ describe('App', () => {
       expect(submitBtn).toBeInTheDocument()
       })
 
-      it('should see a login form on the click of Log in button', async () => {
+      it('should be able to log in', async () => {
+        authorizeUser.mockResolvedValue({
+          user: {
+            id: 75,
+            name: 'Claire',
+            email: 'claire@'
+          }
+        })
+
         const app = (
           <App />
         )
@@ -57,12 +66,12 @@ describe('App', () => {
         // const test = getByPlaceholderText('claire@turing.io')
         // expect(test).toBeInTheDocument()
         fireEvent.click(submitBtn)
-        await new Promise((r) => setTimeout(r, 2000));
+        // await new Promise((r) => setTimeout(r, 2000));
 
-        const greeting = getByText('Welcome', {exact: false})
+        // const greeting = getByText('Welcome', {exact: false})
+        const greeting = await waitFor(() => getByText('Welcome', {exact: false})) 
 
         expect(greeting).toBeInTheDocument()
-        // const greeting = await waitFor(() => getByText('Welcome', {exact: false})) 
 
         // await waitFor(() => expect(greeting).toBeInTheDocument())
         })
