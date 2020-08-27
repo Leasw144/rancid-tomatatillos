@@ -19,7 +19,6 @@ class App extends Component {
       error: '',
       user:{},
       userRatings:[],
-      isShowingDetails: false,
       movieInfo: {}
     }
     this.getMovies = getMovies
@@ -100,10 +99,17 @@ class App extends Component {
               /> 
             }}
           />
-          <Route exact path='/movies/:id' 
+          <Route 
+            exact path='/movies/:id' 
             render={() => {
               return (
-                <DetailsPage movie={this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} error={this.state.error}/>
+                <DetailsPage 
+                  movie={this.state.movieInfo} 
+                  userId={this.state.user.id} 
+                  resetter={this.resetState} 
+                  submitRating={this.postUserRating} 
+                  error={this.state.error}
+                />
               )
             }}
           />
