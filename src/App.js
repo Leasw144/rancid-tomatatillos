@@ -7,7 +7,6 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import DetailsPage from './DetailsPage/DetailsPage'
 import Login from './Login/Login'
-// import moment from 'moment'
 
 import './App-resources/App.css';
 import './assets/tomato.jpg'
@@ -19,13 +18,10 @@ class App extends Component {
       movies: [],
       error: '',
       user:{},
-      // isLoggedIn: false,
-      // isLogInShowing: false,
       userRatings:[],
       isShowingDetails: false,
       movieInfo: {}
     }
-    // console.log(moment('2020/12/12').format("DD/MM/YYYY"))
     this.getMovies = getMovies
     this.authorizeUser = authorizeUser
     this.findMovie = findMovie
@@ -40,14 +36,6 @@ class App extends Component {
       this.setState({ error: 'An error has occurred'})
     })
   }
-
-  // handleClick = () => {
-  //   this.setState(prevState => ({isLogInShowing: !prevState.isLogInShowing}))
-  // }
-
-  // logoutUser = () => {
-  //   this.setState(prevState => ({isLoggedIn: !prevState.isLoggedIn, user:{}}))
-  // }
 
   getUser = (username, password)  => {
     this.authorizeUser(username, password)
@@ -72,60 +60,50 @@ class App extends Component {
     })
   }
   
-  showInfo = async (id) =>{
+  showInfo = (id) =>{
     console.log('this function has been passed down successfully, bro', id)
-    // this.setState(prevState => ({ isShowingDetails: !prevState.isShowingDetails }))
-    let data = await this.findMovie(id)
-    console.log('data1', data)
-    console.log('data.movie', data)
-    this.setState({movieInfo: data.movie})
+    this.findMovie(id)
+    .then( (data) =>  this.setState({movieInfo: data.movie}))
+    .catch(error => {
+      console.log('error Fetching Movie!')
+      this.setState({error: 'Your movie has not been found! Please return home.'})
+      console.log('stateErrMsg', this.state.error)
+    })
     return <Redirect to={`/movies/${id}`} />
-    // .catch(error => {
-    //   console.log('error Fetching Movie!')
-    //   this.setState({error: 'Your movie has not been found!'})
-    // })
   }
 
-  // stateHandler() {
-  //   if(this.state.isLogInShowing) {
-  //     return (
-  //       <Login getUser={this.getUser} /> 
-  //     ) 
-  //   } else if (this.state.movieInfo.id) {
-  //     return (
-  //       <DetailsPage movieInfo={this.state.movieInfo} userId= {this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating}/>
-  //     )
-  //   } else if (this.state.error) {
-  //     return (
-  //       <p className='error-msg'>{this.state.error}</p>
-  //     )
-  //   }
-  //   return (
-  //     <CardSection allMovies={this.state.movies} showInfo={this.showInfo} />
-  //   )
-  // }
-
   resetState = () => {
-    // console.log('this is this', this)
     this.setState({movieInfo: {}})
     return <Redirect to='/' />
   }
 
   render() {
-    console.log('movieInfo', this.state.movieInfo)
     return (
       <main className="App">
         <Header user={this.state.user}/>
-          {/* {this.stateHandler()} */}
         <Switch>
-        
-          <Route exact path='/' render={() => <CardSection allMovies={this.state.movies} showInfo={this.showInfo}/>}/>
-          <Route exact path='/login' render={() => <Login getUser={this.getUser} error={this.state.error} user={this.state.user}/> }/>
-
+          <Route 
+            exact path='/' 
+            render={() => {
+             return <CardSection 
+                allMovies={this.state.movies} 
+                showInfo={this.showInfo}/>
+            }}
+          />
+          <Route 
+            exact path='/login' 
+            render={() => {
+              return <Login 
+                getUser={this.getUser} 
+                error={this.state.error} 
+                user={this.state.user}
+              /> 
+            }}
+          />
           <Route exact path='/movies/:id' 
             render={() => {
               return (
-                <DetailsPage movie={this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />
+                <DetailsPage movie={this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} error={this.state.error}/>
               )
             }}
           />

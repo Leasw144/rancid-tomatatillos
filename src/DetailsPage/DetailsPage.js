@@ -23,6 +23,7 @@ class DetailsPage extends Component {
     return (
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
+    {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.props.movie.backdrop_path} alt={this.props.movie.title} />
           {this.props.movie.tagline && <p className='tag-line'>{this.props.movie.tagline}</p>}
         </section>
