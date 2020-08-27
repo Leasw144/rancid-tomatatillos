@@ -74,12 +74,12 @@ class App extends Component {
   
   showInfo = async (id) =>{
     console.log('this function has been passed down successfully, bro', id)
-    this.setState(prevState => ({ isShowingDetails: !prevState.isShowingDetails }))
+    // this.setState(prevState => ({ isShowingDetails: !prevState.isShowingDetails }))
     let data = await this.findMovie(id)
     console.log('data1', data)
     console.log('data.movie', data)
     this.setState({movieInfo: data.movie})
-    return <Redirect to='/movies/{id}' />
+    return <Redirect to={`/movies/${id}`} />
     // .catch(error => {
     //   console.log('error Fetching Movie!')
     //   this.setState({error: 'Your movie has not been found!'})
@@ -107,7 +107,7 @@ class App extends Component {
 
   resetState = () => {
     // console.log('this is this', this)
-    this.setState({isShowingDetails: false, movieInfo: {}})
+    this.setState({movieInfo: {}})
     return <Redirect to='/' />
   }
 
