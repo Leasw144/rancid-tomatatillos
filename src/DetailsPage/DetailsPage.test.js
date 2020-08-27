@@ -2,6 +2,7 @@ import React from 'react';
 import DetailsPage from '../DetailsPage/DetailsPage';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect'
 
 describe('DetailsPage', () => {
   it.only('should display a movie page when a movie card is clicked', () => {

@@ -1,8 +1,10 @@
 import React from 'react'
 import moment from 'moment'
 
+const  rootURL = 'https://rancid-tomatillos.herokuapp.com/api/v2';
+
 export function authorizeUser(username, password) {
-  fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+  return fetch(`${rootURL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -12,17 +14,24 @@ export function authorizeUser(username, password) {
       password: password,
     })
   })
-    .then(response => response.json())
-    .then(data => this.setState({user: data.user, isLogInShowing: false}))
-    .catch(error => {
-      console.log('Error fetching user')
-      this.setState({error: 'Please check your login information'})
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
     })
+    // .then(response => response.json())
+    // .then(data => this.setState({user: data.user, isLogInShowing: false}))
+    // .catch(error => {
+    //   console.log('Error fetching user')
+    //   this.setState({error: 'Please check your login information'})
+    // })
 
 }
 
 export function getMovies() {
-  fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+  fetch(`${rootURL}/movies`)
   .then(response => response.json())
   .then(data => this.setState({movies: data.movies}))
   .catch(error => {

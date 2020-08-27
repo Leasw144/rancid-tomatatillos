@@ -14,7 +14,7 @@ class Login extends Component {
     }
 
     this.getUser = props.getUser;
-    console.log('login', props)
+    // console.log('login', props)
   }
 
   handleChange = event => {
@@ -27,7 +27,7 @@ class Login extends Component {
     if(this.state.username) {
       this.setState({toCardSection: true})
     }
-    console.log(this.getUser)
+    // console.log(this.getUser)
   }
 
   render() {

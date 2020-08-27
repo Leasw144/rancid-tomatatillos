@@ -35,6 +35,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log('user', this.state.user)
    this.getMovies()
   }
 
@@ -48,6 +49,11 @@ class App extends Component {
 
   getUser = (username, password)  => {
     this.authorizeUser(username, password)
+    .then(data => this.setState({user: data.user, isLogInShowing: false}))
+    .catch(error => {
+      console.log('Error fetching user')
+      this.setState({error: 'Please check your login information'})
+    })
   }
 
   postUserRating = (userId, movieId, userRating) => {
