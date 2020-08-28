@@ -1,8 +1,7 @@
-import React from 'react'
-import moment from 'moment'
+const  rootURL = 'https://rancid-tomatillos.herokuapp.com/api/v2';
 
 export function authorizeUser(username, password) {
-  fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+  return fetch(`${rootURL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -12,27 +11,29 @@ export function authorizeUser(username, password) {
       password: password,
     })
   })
-    .then(response => response.json())
-    .then(data => this.setState({user: data.user, isLogInShowing: false}))
-    .catch(error => {
-      console.log('Error fetching user')
-      this.setState({error: 'Please check your login information'})
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
     })
-
 }
 
 export function getMovies() {
-  fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-  .then(response => response.json())
-  .then(data => this.setState({movies: data.movies}))
-  .catch(error => {
-    console.log('Error fetching all movies')
-    this.setState({ error: 'An error has occurred'})
+ return fetch(`${rootURL}/movies`)
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
   })
 }
 
+// currently not in use. Will need to break apart similar to other fetch calls once we enable this feature.
 export function getRatings(id) {
-  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`)
+  fetch(`${rootURL}/users/${id}/ratings`)
     .then(response => response.json())
     .then(data => this.setState({ userRatings: data.ratings }))
     .catch(error => {
@@ -42,17 +43,18 @@ export function getRatings(id) {
 }
 
 export function findMovie(id) {
-  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
-    .then(response => response.json())
-    .then(data => this.setState({movieInfo: data.movie}))
-    .catch(error => {
-      console.log('error Fetching Movie!')
-      this.setState({error: 'Your movie has not been found!'})
+  return fetch(`${rootURL}/movies/${id}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
     })
 }
 
 export function postRating(userId, movieId, userRating) {
-  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings`, {
+  fetch(`${rootURL}/users/${userId}/ratings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -62,10 +64,11 @@ export function postRating(userId, movieId, userRating) {
       rating: Number(userRating),
     })
   })
-    .then(response => response.json())
-    .then(data => this.setState({userRatings: data.userRating}))
-    .catch(error => {
-      console.log('Error fetching user')
-      this.setState({error: 'Please check your login information'})
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
     })
 }

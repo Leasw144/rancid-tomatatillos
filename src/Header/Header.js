@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Header.css'
 import tomato from '../assets/tomato.jpg'
 import { Link, NavLink } from 'react-browser-router'

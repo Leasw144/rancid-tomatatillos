@@ -5,8 +5,8 @@ import DetailsPage from '../DetailsPage/DetailsPage'
 
 
 function MovieCard(props) {
-  console.log('These are your movie props', props)
-    // const movieRatings = props.userRatings.find(movie => movie.rating === props.id)
+  // console.log('These are your movie props', props)
+  //   const movieRatings = props.userRatings.find(movie => movie.rating === props.id)
     return (
       <Link to={`/movies/${props.id}`} render={() => <DetailsPage {...this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />} >
         <article className='MovieCard' id={props.id} onClick={() => props.click(props.id)}>
@@ -14,11 +14,12 @@ function MovieCard(props) {
           <p><span>Title:</span> {props.title}</p>
           <p><span>Release Date:</span> {props.releaseDate}</p>
           <p><span>Average Rating:</span> {props.rating.toFixed(1)}</p>
-          <p><span>Your Rating:</span></p>
-          {/* {movieRatings && <p>movieRatings.movie</p>} */}
+          
+          {/* {movieRatings && <p><span>Your Rating:</span>I'm showing up</p>} */}
         </article>
       </Link>
     )
 }
 
 export default MovieCard
+// return Redirect to=''

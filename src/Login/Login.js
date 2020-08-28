@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import './Login.css';
-import App from '../App';
 import { Redirect, Link } from 'react-router-dom'
 
 class Login extends Component {
@@ -9,33 +8,34 @@ class Login extends Component {
     this.state = {
     username:'',
     password: '',
-    error: '',
-    toCardSection: false
+    // toCardSection: false
     }
 
-    this.getUser = props.getUser;
-    console.log('login', props)
+    // this.getUser = props.getUser;
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value})
   }
 
-  handleLogIn = (event) => {
+  handleLogIn = async (event) => {
     event.preventDefault();
-    this.getUser(this.state.username, this.state.password);
-    if(this.state.username) {
-      this.setState({toCardSection: true})
-    }
-    console.log(this.getUser)
+    const myVar = await this.props.getUser(this.state.username, this.state.password);
+    console.log('this.props.user,above', this.props.user)
+    if (this.props.user.name) {
+      console.log('myVar:', myVar)
+      // this.setState({user: this.props.user})
+      console.log('this.props.user, below', this.props.user)
+      return <Redirect from='/login' to='/' />
+     }
   }
 
   render() {
-    if (this.state.toCardSection === true) {
-      return (
-        <Redirect to='/' />
-      )
-    }
+    // if (this.state.toCardSection === true) {
+    //   return (
+    //     <Redirect to='/' />
+    //   )
+    // }
     return (
       <section className='Login'>
         <form className='form-section'>
@@ -56,8 +56,8 @@ class Login extends Component {
             value={this.state.password}
             onChange = {this.handleChange}
           /> 
-          { this.state.error && <p className='error-msg'>{this.state.userError}</p> }
-          <button onClick={ event => this.handleLogIn(event)}>Submit</button>
+          { this.props.error && <p className='error-msg'>{this.props.error}</p> }
+          <button onClick={event => this.handleLogIn(event)}>Submit</button>
         </form>
       </section>
       )

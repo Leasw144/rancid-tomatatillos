@@ -18,6 +18,7 @@ function CardSection(props) {
             releaseDate={movie.release_date}
             rating={movie.average_rating}
             click={props.showInfo}
+            userRatings={props.userRatings}
           />
         </Link>
       )
