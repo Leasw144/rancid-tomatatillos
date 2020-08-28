@@ -12,8 +12,9 @@ describe('App', () => {
   // test when you fill out the form and submit, you see users name at the top.
   it('should see a login button in the header', () => {
     const app = (
-      <BrowserRouter></BrowserRouter>
+      <BrowserRouter>
       <App />
+      </BrowserRouter>
     )
 
     const { getByRole } = render(app)
