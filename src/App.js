@@ -46,8 +46,8 @@ class App extends Component {
      if (data) {
        console.log('data:', data)
        this.setState({user: data.user})
+      //  this.props.history.push('/')
       }
-      // return <Redirect to='/' />
     // .then(data => {
     // })
     // .catch(error => {
@@ -101,13 +101,11 @@ class App extends Component {
           <Route 
             exact path='/login' 
             render={() => {
-              return <Login 
+            return this.state.user.name ? <Redirect to='/'/> : <Login 
                 getUser={this.getUser} 
                 error={this.state.error} 
                 user={this.state.user}
-              /> 
-            }}
-          />
+            />}} />
           <Route 
             exact path='/movies/:id' 
             render={() => {

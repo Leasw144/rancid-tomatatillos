@@ -24,7 +24,7 @@ class DetailsPage extends Component {
     return (
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
-    {this.props.error && <h1>{this.props.error}</h1>}
+          {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.props.movie.backdrop_path} alt={this.props.movie.title} />
           {this.props.movie.tagline && <p className='tag-line'>{this.props.movie.tagline}</p>}
         </section>
@@ -38,7 +38,6 @@ class DetailsPage extends Component {
           {this.props.movie.budget > 0 && <p><span>Budget:</span> {this.props.movie.budget}</p>}
           {this.props.movie.revenue > 0 && <p><span>Revenue:</span> {this.props.movie.revenue}</p>}
          <form className='rating-form'>
-            {/* <NumericInput  min={1} max={10} value={0}/> */}
             <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
               {ratingOptions}
             </select>
