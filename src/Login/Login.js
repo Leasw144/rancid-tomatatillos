@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import './Login.css';
-import App from '../App';
 import { Redirect, Link } from 'react-router-dom'
 
 class Login extends Component {
@@ -9,12 +8,10 @@ class Login extends Component {
     this.state = {
     username:'',
     password: '',
-    // error: '',
     toCardSection: false
     }
 
     this.getUser = props.getUser;
-    // console.log('login', props)
   }
 
   handleChange = event => {
@@ -25,8 +22,8 @@ class Login extends Component {
     event.preventDefault();
     this.getUser(this.state.username, this.state.password);
     if (this.props.user.name) {
-      this.setState({toCardSection: true})
-      console.log('ourState', this.state)
+      console.log('inside the IF')
+      return <Redirect to='/' />
     }
   }
 

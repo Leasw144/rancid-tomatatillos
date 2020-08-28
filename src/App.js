@@ -40,6 +40,7 @@ class App extends Component {
     this.authorizeUser(username, password)
     .then(data => {
       this.setState({user: data.user})
+      console.log('state:', this.state.user)
     })
     .catch(error => {
       console.log('Error fetching user')
@@ -47,7 +48,6 @@ class App extends Component {
       console.log('this.state.error in App', this.state.error)
     })
     return <Redirect to='/' />
-
   }
 
   postUserRating = (userId, movieId, userRating) => {
@@ -114,7 +114,6 @@ class App extends Component {
             }}
           />
         </Switch>
-
       </main>
     )
   };

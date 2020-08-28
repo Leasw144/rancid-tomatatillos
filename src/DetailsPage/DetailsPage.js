@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './DetailsPage.css'
+import {Link} from 'react-router-dom'
 // import NumericInput from 'react-numeric-input';
 
 class DetailsPage extends Component {
@@ -44,7 +45,7 @@ class DetailsPage extends Component {
             <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.props.movieInfo.id, this.state.userRating)}>Submit Rating</button>
          </form>
   
-          <button className='home-btn' type='button' onClick={this.props.resetter}>Return to Home </button>
+          <Link className='home-btn' to='/'>Return to Home </Link>
         </article>
         
       </section>

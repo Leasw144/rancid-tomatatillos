@@ -1,6 +1,3 @@
-import React from 'react'
-import moment from 'moment'
-
 const  rootURL = 'https://rancid-tomatillos.herokuapp.com/api/v2';
 
 export function authorizeUser(username, password) {
@@ -74,5 +71,4 @@ export function postRating(userId, movieId, userRating) {
         throw response;
       }
     })
-     
 }
