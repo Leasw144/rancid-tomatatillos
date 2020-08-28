@@ -8,31 +8,34 @@ class Login extends Component {
     this.state = {
     username:'',
     password: '',
-    toCardSection: false
+    // toCardSection: false
     }
 
-    this.getUser = props.getUser;
+    // this.getUser = props.getUser;
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value})
   }
 
-  handleLogIn = (event) => {
+  handleLogIn = async (event) => {
     event.preventDefault();
-    this.getUser(this.state.username, this.state.password);
+    const myVar = await this.props.getUser(this.state.username, this.state.password);
+    console.log('this.props.user,above', this.props.user)
     if (this.props.user.name) {
-      console.log('inside the IF')
-      return <Redirect to='/' />
-    }
+      console.log('myVar:', myVar)
+      // this.setState({user: this.props.user})
+      console.log('this.props.user, below', this.props.user)
+      return <Redirect from='/login' to='/' />
+     }
   }
 
   render() {
-    if (this.state.toCardSection === true) {
-      return (
-        <Redirect to='/' />
-      )
-    }
+    // if (this.state.toCardSection === true) {
+    //   return (
+    //     <Redirect to='/' />
+    //   )
+    // }
     return (
       <section className='Login'>
         <form className='form-section'>

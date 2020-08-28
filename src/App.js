@@ -36,18 +36,25 @@ class App extends Component {
     })
   }
 
-  getUser = (username, password)  => {
-    this.authorizeUser(username, password)
-    .then(data => {
-      this.setState({user: data.user})
-      console.log('state:', this.state.user)
-    })
-    .catch(error => {
+  getUser = async (username, password)  => {
+     const data = await this.authorizeUser(username, password).catch(() => {
       console.log('Error fetching user')
       this.setState({error: 'Please check your login information'})
       console.log('this.state.error in App', this.state.error)
-    })
-    return <Redirect to='/' />
+     })
+
+     if (data) {
+       console.log('data:', data)
+       this.setState({user: data.user})
+      }
+      // return <Redirect to='/' />
+    // .then(data => {
+    // })
+    // .catch(error => {
+    //   console.log('Error fetching user')
+    //   this.setState({error: 'Please check your login information'})
+    //   console.log('this.state.error in App', this.state.error)
+    // })
   }
 
   postUserRating = (userId, movieId, userRating) => {
