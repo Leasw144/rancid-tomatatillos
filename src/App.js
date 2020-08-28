@@ -58,7 +58,7 @@ class App extends Component {
       this.setState({error: 'Please check your login information'})
     })
   }
-  
+
   showInfo = (id) =>{
     console.log('this function has been passed down successfully, bro', id)
     this.findMovie(id)
@@ -86,7 +86,9 @@ class App extends Component {
             render={() => {
              return <CardSection 
                 allMovies={this.state.movies} 
-                showInfo={this.showInfo}/>
+                showInfo={this.showInfo}
+                userRatings={this.state.userRatings}
+              />
             }}
           />
           <Route 
