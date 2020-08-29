@@ -44,8 +44,7 @@ class DetailsPage extends Component {
             <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.props.movieInfo.id, this.state.userRating)}>Submit Rating</button>
          </form>
   
-          <Link className='home-btn' to='/'>Return to Home </Link>
-        </article>
+         <Link  to='/'><button className='home-btn' >Return to Home</button></Link>        </article>
         
       </section>
     )
