@@ -22,6 +22,9 @@ class DetailsPage extends Component {
     <option key={number} value={number}>{number}</option>
     ))
     
+    const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.props.movie.id)
+      console.log('findMovieIRated', findMovieIRated)
+
     return (
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
@@ -36,6 +39,10 @@ class DetailsPage extends Component {
           {this.props.movie.release_date && <p><span>Release Date:</span> {this.props.movie.release_date}</p>}
           {this.props.movie.runtime > 0 && <p><span>Runtime:</span> {this.props.movie.runtime}</p>}
           {this.props.movie.average_rating > 0 && <p><span>Average Rating:</span> {this.props.movie.average_rating.toFixed(1)}</p>}
+
+          {findMovieIRated && <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p>}
+
+
           {this.props.movie.budget > 0 && <p><span>Budget:</span> {this.props.movie.budget}</p>}
           {this.props.movie.revenue > 0 && <p><span>Revenue:</span> {this.props.movie.revenue}</p>}
          <form className='rating-form'>

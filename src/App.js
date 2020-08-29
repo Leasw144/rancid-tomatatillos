@@ -89,7 +89,7 @@ class App extends Component {
              return <CardSection 
                 allMovies={this.state.movies} 
                 showInfo={this.showInfo}
-                userRatings={this.state.userRatings}
+                // userRatings={this.state.userRatings}
               />
             }}
           />
@@ -111,6 +111,7 @@ class App extends Component {
                   resetter={this.resetState} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}
+                  userRatings={this.state.userRatings}
                 />
               )
             }}
