@@ -6,7 +6,10 @@ import DetailsPage from '../DetailsPage/DetailsPage'
 
 function MovieCard(props) {
   // console.log('These are your movie props', props)
-  //   const movieRatings = props.userRatings.find(movie => movie.rating === props.id)
+  console.log('props.userRatings', props.userRatings)
+    // let myRatings = props.userRatings.filter(movie => movie.rating)
+    // const myRatings = props.userRatings.find(movie)
+    // console.log('myRatings', myRatings)
     return (
       <Link to={`/movies/${props.id}`} render={() => <DetailsPage {...this.state.movieInfo} userId={this.state.user.id} resetter={this.resetState} submitRating={this.postUserRating} />} >
         <article className='MovieCard' id={props.id} onClick={() => props.click(props.id)}>

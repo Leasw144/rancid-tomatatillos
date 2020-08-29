@@ -53,11 +53,11 @@ class App extends Component {
 
   postUserRating = (userId, movieId, userRating) => {
     this.postRating(userId, movieId, userRating)
-    .then(data => this.setState({userRatings: data.userRating}))
-    .catch(error => {
-      console.log('Error fetching user')
-      this.setState({error: 'Please check your login information'})
-    })
+    // .then(data => this.setState({userRatings: data.userRating}))
+    // .catch(error => {
+    //   console.log('Error fetching user')
+    //   this.setState({error: 'Please check your login information'})
+    // })
   }
 
   showInfo = (id) =>{
@@ -78,6 +78,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('movies', this.state.movies)
     return (
       <main className="App">
         <Header user={this.state.user}/>

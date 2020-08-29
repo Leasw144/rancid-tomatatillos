@@ -16,6 +16,7 @@ class DetailsPage extends Component {
   }
 
   render() {
+    console.log('this.props', this.props)
     const movie = this.props.movieInfo
     const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
     <option key={number} value={number}>{number}</option>
@@ -41,7 +42,7 @@ class DetailsPage extends Component {
             <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
               {ratingOptions}
             </select>
-            <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.props.movieInfo.id, this.state.userRating)}>Submit Rating</button>
+            <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.props.movie.id, this.state.userRating)}>Submit Rating</button>
          </form>
   
          <Link  to='/'><button className='home-btn' >Return to Home</button></Link>        </article>

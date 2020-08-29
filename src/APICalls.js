@@ -64,11 +64,17 @@ export function postRating(userId, movieId, userRating) {
       rating: Number(userRating),
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw response;
-      }
-    })
+  .then(response => response.json())
+  .then(data => this.setState({userRatings: data.userRating}))
+  .catch(error => {
+    console.log('Error fetching user')
+    this.setState({error: 'Please check your login information'})
+  })
+    // .then(response => {
+    //   if (response.ok) {
+    //     return response.json()
+    //   } else {
+    //     throw response;
+    //   }
+    // })
 }
