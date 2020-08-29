@@ -25,6 +25,7 @@ class App extends Component {
     this.authorizeUser = authorizeUser
     this.findMovie = findMovie
     this.postRating = postRating
+    this.getRatings = getRatings
   }
 
   componentDidMount() {
@@ -46,6 +47,7 @@ class App extends Component {
     if (data) {
       console.log('data:', data)
       this.setState({user: data.user})
+      await this.getRatings(this.state.user.id)
     }
   }
 
