@@ -3,6 +3,7 @@ import { render, waitFor, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../App';
 import { authorizeUser } from '../APICalls';
+import BrowserRouter from 'react-browser-router/lib/BrowserRouter';
 jest.mock('../APICalls')
 // import MovieCard from './MovieCard'
 
@@ -11,7 +12,9 @@ describe('App', () => {
   // test when you fill out the form and submit, you see users name at the top.
   it('should see a login button in the header', () => {
     const app = (
+      <BrowserRouter>
       <App />
+      </BrowserRouter>
     )
 
     const { getByRole } = render(app)

@@ -37,24 +37,16 @@ class App extends Component {
   }
 
   getUser = async (username, password)  => {
-     const data = await this.authorizeUser(username, password).catch(() => {
-      console.log('Error fetching user')
-      this.setState({error: 'Please check your login information'})
-      console.log('this.state.error in App', this.state.error)
-     })
+    const data = await this.authorizeUser(username, password).catch(() => {
+    console.log('Error fetching user')
+    this.setState({error: 'Please check your login information'})
+    console.log('this.state.error in App', this.state.error)
+    })
 
-     if (data) {
-       console.log('data:', data)
-       this.setState({user: data.user})
-      }
-      // return <Redirect to='/' />
-    // .then(data => {
-    // })
-    // .catch(error => {
-    //   console.log('Error fetching user')
-    //   this.setState({error: 'Please check your login information'})
-    //   console.log('this.state.error in App', this.state.error)
-    // })
+    if (data) {
+      console.log('data:', data)
+      this.setState({user: data.user})
+    }
   }
 
   postUserRating = (userId, movieId, userRating) => {
@@ -101,13 +93,11 @@ class App extends Component {
           <Route 
             exact path='/login' 
             render={() => {
-              return <Login 
-                getUser={this.getUser} 
-                error={this.state.error} 
-                user={this.state.user}
-              /> 
-            }}
-          />
+              return this.state.user.name ? <Redirect to='/'/> : <Login 
+              getUser={this.getUser} 
+              error={this.state.error} 
+              user={this.state.user}
+            />}} />
           <Route 
             exact path='/movies/:id' 
             render={() => {

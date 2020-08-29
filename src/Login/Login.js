@@ -15,19 +15,19 @@ class Login extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value})
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   handleLogIn = async (event) => {
     event.preventDefault();
     const myVar = await this.props.getUser(this.state.username, this.state.password);
-    console.log('this.props.user,above', this.props.user)
-    if (this.props.user.name) {
-      console.log('myVar:', myVar)
+    // console.log('this.props.user,above', this.props.user)
+    // if (this.props.user.name) {
+      // console.log('myVar:', myVar)
       // this.setState({user: this.props.user})
-      console.log('this.props.user, below', this.props.user)
-      return <Redirect from='/login' to='/' />
-     }
+      // console.log('this.props.user, below', this.props.user)
+      // return <Redirect from='/login' to='/' />
+    //  }
   }
 
   render() {
