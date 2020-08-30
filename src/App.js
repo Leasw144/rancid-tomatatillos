@@ -80,11 +80,11 @@ class App extends Component {
     await removeRating(this.state.user.id, ratingId)
     const updatedRatings = this.state.userRatings.filter(movie=> movie.movie_id !== movieId)
     this.setState({ userRatings: updatedRatings })
-    .catch(error => {
-      console.log('error deleting Movie!')
-      this.setState({error: 'Your movie rating has not been deleted'})
-      console.log('stateErrMsg', this.state.error)
-    })
+    // .catch(error => {
+    //   console.log('error deleting Movie!')
+    //   this.setState({error: 'Your movie rating has not been deleted'})
+    //   console.log('stateErrMsg', this.state.error)
+    // })
   }
 
   render() {
