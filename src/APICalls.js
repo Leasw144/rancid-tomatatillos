@@ -97,5 +97,23 @@ export function removeRating(userId,  ratingId) {
   })
 }
 
-
+export function postComment (userId, userComment, commentAuthor) {
+  return fetch(`http://localhost:3001/api/v1/movies/${userId}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify({
+        comment: userComment,
+        author: commentAuthor,
+      })
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
+  })
+}
 
