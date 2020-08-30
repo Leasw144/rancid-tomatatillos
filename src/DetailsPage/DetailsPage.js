@@ -9,6 +9,7 @@ class DetailsPage extends Component {
     super(props);
     this.state = {
       userRating: '',
+      movieComments: [],
       // hasRating: false
     }
   }
