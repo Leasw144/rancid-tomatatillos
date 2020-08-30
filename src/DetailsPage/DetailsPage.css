@@ -4,7 +4,7 @@
 
 .DetailsPage {
   display: flex;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 1rem;
 }
 
@@ -57,4 +57,26 @@
 .tag-line {
   color: #E8EDDF;
   font-size: 18px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #8b3746;
+  width: 25rem;
+  margin-left: 15%;
+  padding: 10px;
+  color: #E8EDDF;
+  align-items: center;
+}
+
+.comment-form textarea {
+  height: 60px;
+  margin-bottom: 20px;
+  width: 22rem;
+}
+
+.comment-form button {
+  width: 12rem;
+  padding: .4rem .5rem;
 }

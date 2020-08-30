@@ -32,7 +32,13 @@ class DetailsPage extends Component {
   postUserComment = async (userComment) => {
     console.log('this.props', this.props)
     await this.postComment(this.props.userId, userComment, this.props.userName)
-      .then(data => console.log(data))
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
+    })
   }
 
   render() {
