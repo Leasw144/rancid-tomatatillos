@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import { Route, Switch, render, match, Redirect} from 'react-router-dom'
-import {authorizeUser, getMovies, findMovie, getRatings, postRating} from './APICalls'
+import {authorizeUser, getMovies, findMovie, getRatings, postRating, removeRating} from './APICalls'
 
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
@@ -25,6 +25,8 @@ class App extends Component {
     this.authorizeUser = authorizeUser
     this.findMovie = findMovie
     this.postRating = postRating
+    this.getRatings = getRatings
+    this.removeRating = removeRating
   }
 
   componentDidMount() {
@@ -44,22 +46,21 @@ class App extends Component {
     })
 
     if (data) {
-      console.log('data:', data)
       this.setState({user: data.user})
+      this.getRatings(this.state.user.id)
     }
   }
 
-  postUserRating = (userId, movieId, userRating) => {
-    this.postRating(userId, movieId, userRating)
-    .then(data => this.setState({userRatings: data.userRating}))
+  postUserRating = async (userId, movieId, userRating) => {
+    await this.postRating(userId, movieId, userRating)
+    .then(data => this.setState({userRatings: [...this.state.userRatings, data.rating]}))
     .catch(error => {
-      console.log('Error fetching user')
-      this.setState({error: 'Please check your login information'})
+      console.log('Error fetching rating')
+      this.setState({error: 'Error posting ratings'})
     })
   }
 
   showInfo = (id) =>{
-    console.log('this function has been passed down successfully, bro', id)
     this.findMovie(id)
     .then( (data) =>  this.setState({movieInfo: data.movie}))
     .catch(error => {
@@ -70,15 +71,27 @@ class App extends Component {
     return <Redirect to={`/movies/${id}`} />
   }
 
-  resetState = () => {
-    this.setState({movieInfo: {}})
+  logoutUser = () => {
+    this.setState({user: {}, userRatings:[]})
     return <Redirect to='/' />
   }
 
+  deleteRating = async (movieId, ratingId) => {
+    await removeRating(this.state.user.id, ratingId)
+    const updatedRatings = this.state.userRatings.filter(movie=> movie.movie_id !== movieId)
+    this.setState({ userRatings: updatedRatings })
+    // .catch(error => {
+    //   console.log('error deleting Movie!')
+    //   this.setState({error: 'Your movie rating has not been deleted'})
+    //   console.log('stateErrMsg', this.state.error)
+    // })
+  }
+
   render() {
+    // console.log('this.state.userRatings', this.state.userRatings)
     return (
       <main className="App">
-        <Header user={this.state.user}/>
+        <Header user={this.state.user} resetter={this.logoutUser} />
         <Switch>
           <Route 
             exact path='/' 
@@ -105,9 +118,10 @@ class App extends Component {
                 <DetailsPage 
                   movie={this.state.movieInfo} 
                   userId={this.state.user.id} 
-                  resetter={this.resetState} 
+                  deleteRating={this.deleteRating} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}
+                  userRatings={this.state.userRatings}
                 />
               )
             }}

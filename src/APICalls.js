@@ -54,7 +54,7 @@ export function findMovie(id) {
 }
 
 export function postRating(userId, movieId, userRating) {
-  fetch(`${rootURL}/users/${userId}/ratings`, {
+  return fetch(`${rootURL}/users/${userId}/ratings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -64,6 +64,12 @@ export function postRating(userId, movieId, userRating) {
       rating: Number(userRating),
     })
   })
+  // .then(response => response.json())
+  // .then(data => this.setState({userRatings: data.userRating}))
+  // .catch(error => {
+  //   console.log('Error fetching user')
+  //   this.setState({error: 'Please check your login information'})
+  // })
     .then(response => {
       if (response.ok) {
         return response.json()
@@ -72,3 +78,24 @@ export function postRating(userId, movieId, userRating) {
       }
     })
 }
+
+export function removeRating(userId,  ratingId) {
+  return fetch(`${rootURL}/users/${userId}/ratings/${ratingId}`, 
+  {
+    method: 'DELETE',
+    // headers: {
+    //   'Content-Type': 'application/json'
+    // }
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } 
+    else {
+      throw response;
+    }
+  })
+}
+
+
+

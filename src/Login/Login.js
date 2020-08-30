@@ -8,10 +8,7 @@ class Login extends Component {
     this.state = {
     username:'',
     password: '',
-    // toCardSection: false
     }
-
-    // this.getUser = props.getUser;
   }
 
   handleChange = event => {
@@ -20,22 +17,10 @@ class Login extends Component {
 
   handleLogIn = async (event) => {
     event.preventDefault();
-    const myVar = await this.props.getUser(this.state.username, this.state.password);
-    // console.log('this.props.user,above', this.props.user)
-    // if (this.props.user.name) {
-      // console.log('myVar:', myVar)
-      // this.setState({user: this.props.user})
-      // console.log('this.props.user, below', this.props.user)
-      // return <Redirect from='/login' to='/' />
-    //  }
+    await this.props.getUser(this.state.username, this.state.password);
   }
 
   render() {
-    // if (this.state.toCardSection === true) {
-    //   return (
-    //     <Redirect to='/' />
-    //   )
-    // }
     return (
       <section className='Login'>
         <form className='form-section'>
@@ -48,7 +33,7 @@ class Login extends Component {
             onChange = {this.handleChange}
           />
 
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password: qwer1234</label>
           <input
             type='password'
             name='password'
@@ -62,9 +47,6 @@ class Login extends Component {
       </section>
       )
   }
-
-
-
 
 }
 

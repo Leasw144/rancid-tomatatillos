@@ -14,7 +14,11 @@ function Header(props) {
         </h1>
         {props.user.name && <h2>Welcome {props.user.name}!</h2>}
       </div>
-      <NavLink to='/login' render={Login}>Log {props.user.name ? 'out' : 'in'}</NavLink>
+
+      {props.user.name ? <button type='button' onClick={props.resetter}>Log out</button> : 
+      <NavLink to='/login' render={Login}>
+        <button>Log in</button>
+      </NavLink>}
     </header>
   )
 }
