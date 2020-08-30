@@ -71,7 +71,7 @@ class App extends Component {
   }
 
   resetState = () => {
-    this.setState({user: {}})
+    this.setState({user: {}, userRatings:[]})
     return <Redirect to='/' />
   }
 
