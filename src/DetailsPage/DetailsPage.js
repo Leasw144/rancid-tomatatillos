@@ -36,6 +36,7 @@ class DetailsPage extends Component {
       console.log('error commenting on movie!')
       this.setState({error: 'An error occurred. Your comment was not saved'})
     })
+    this.setState({userComment: ''})
   }
 
   getUserComments = async () => {
