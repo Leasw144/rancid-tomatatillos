@@ -11,6 +11,7 @@ class DetailsPage extends Component {
     this.state = {
       userRating: '',
       movieComments: [],
+      userComment: '',
     }
     this.postComment = postComment
   }
@@ -28,8 +29,9 @@ class DetailsPage extends Component {
     // }
   }
 
-  postUserComment = async (userId, userComment, commentAuthor) => {
-    await this.postComment(this.props.user.id, userComment, commentAuthor)
+  postUserComment = async (userComment) => {
+    console.log('this.props', this.props)
+    await this.postComment(this.props.userId, userComment, this.props.userName)
       .then(data => console.log(data))
   }
 
@@ -55,7 +57,8 @@ class DetailsPage extends Component {
 
           <form className='comment-form'>
             <p>What did you think about {this.props.movie.title}?</p>
-            <textarea></textarea>
+            <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
+            <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
           </form>
 
 

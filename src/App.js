@@ -120,6 +120,7 @@ class App extends Component {
                 <DetailsPage 
                   movie={this.state.movieInfo} 
                   userId={this.state.user.id} 
+                  userName={this.state.user.name}
                   deleteRating={this.deleteRating} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}

@@ -6,7 +6,7 @@ import DetailsPage from '../DetailsPage/DetailsPage'
 
 function MovieCard(props) {
   // console.log('These are your movie props', props)
-  console.log('props.userRatings', props.userRatings)
+  // console.log('props.userRatings', props.userRatings)
     let findMovieIRated = props.userRatings.find(movie => movie.movie_id === props.id)
     // console.log('findMovieIRated', findMovieIRated)
     return (
