@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import './DetailsPage.css'
 import {Link} from 'react-router-dom'
+import { render } from 'react-dom';
 // import NumericInput from 'react-numeric-input';
 
 class DetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userRating: ''
+      userRating: '',
+      // hasRating: false
     }
   }
 
@@ -15,16 +17,20 @@ class DetailsPage extends Component {
     this.setState({ [event.target.name]: event.target.value})
   }
 
+  findRating = () => {
+    const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.props.movie.id)
+    if (findMovieIRated) {
+      return <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p> 
+    } else {
+      return <p>You have not rated yet.</p>
+    }
+  }
+
   render() {
-    console.log('this.props', this.props)
-    const movie = this.props.movieInfo
     const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
     <option key={number} value={number}>{number}</option>
     ))
     
-    const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.props.movie.id)
-      console.log('findMovieIRated', findMovieIRated)
-
     return (
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
@@ -39,10 +45,7 @@ class DetailsPage extends Component {
           {this.props.movie.release_date && <p><span>Release Date:</span> {this.props.movie.release_date}</p>}
           {this.props.movie.runtime > 0 && <p><span>Runtime:</span> {this.props.movie.runtime}</p>}
           {this.props.movie.average_rating > 0 && <p><span>Average Rating:</span> {this.props.movie.average_rating.toFixed(1)}</p>}
-
-          {findMovieIRated && <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p>}
-
-
+          {this.findRating()}
           {this.props.movie.budget > 0 && <p><span>Budget:</span> {this.props.movie.budget}</p>}
           {this.props.movie.revenue > 0 && <p><span>Revenue:</span> {this.props.movie.revenue}</p>}
          <form className='rating-form'>
@@ -51,8 +54,8 @@ class DetailsPage extends Component {
             </select>
             <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.props.movie.id, this.state.userRating)}>Submit Rating</button>
          </form>
-  
-         <Link  to='/'><button className='home-btn' >Return to Home</button></Link>        </article>
+          <Link  to='/'><button type="button" className='home-btn' >Return to Home</button></Link>        
+         </article>
         
       </section>
     )

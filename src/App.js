@@ -45,23 +45,21 @@ class App extends Component {
     })
 
     if (data) {
-      console.log('data:', data)
       this.setState({user: data.user})
-      await this.getRatings(this.state.user.id)
+      this.getRatings(this.state.user.id)
     }
   }
 
-  postUserRating = (userId, movieId, userRating) => {
-    this.postRating(userId, movieId, userRating)
-    // .then(data => this.setState({userRatings: data.userRating}))
-    // .catch(error => {
-    //   console.log('Error fetching user')
-    //   this.setState({error: 'Please check your login information'})
-    // })
+  postUserRating = async (userId, movieId, userRating) => {
+    await this.postRating(userId, movieId, userRating)
+    .then(data => this.setState({userRatings: [...this.state.userRatings, data.rating]}))
+    .catch(error => {
+      console.log('Error fetching rating')
+      this.setState({error: 'Error posting ratings'})
+    })
   }
 
   showInfo = (id) =>{
-    console.log('this function has been passed down successfully, bro', id)
     this.findMovie(id)
     .then( (data) =>  this.setState({movieInfo: data.movie}))
     .catch(error => {
@@ -73,15 +71,15 @@ class App extends Component {
   }
 
   resetState = () => {
-    this.setState({movieInfo: {}})
+    this.setState({user: {}})
     return <Redirect to='/' />
   }
 
   render() {
-    console.log('movies', this.state.movies)
+    console.log('this.state.userRatings', this.state.userRatings)
     return (
       <main className="App">
-        <Header user={this.state.user}/>
+        <Header user={this.state.user} resetter={this.resetState} />
         <Switch>
           <Route 
             exact path='/' 
@@ -89,7 +87,7 @@ class App extends Component {
              return <CardSection 
                 allMovies={this.state.movies} 
                 showInfo={this.showInfo}
-                // userRatings={this.state.userRatings}
+                userRatings={this.state.userRatings}
               />
             }}
           />
@@ -108,7 +106,7 @@ class App extends Component {
                 <DetailsPage 
                   movie={this.state.movieInfo} 
                   userId={this.state.user.id} 
-                  resetter={this.resetState} 
+                  // resetter={this.resetState} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}
                   userRatings={this.state.userRatings}
