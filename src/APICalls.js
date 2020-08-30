@@ -78,3 +78,24 @@ export function postRating(userId, movieId, userRating) {
       }
     })
 }
+
+export function removeRating(userId,  ratingId) {
+  return fetch(`${rootURL}/users/${userId}/ratings/${ratingId}`, 
+  {
+    method: 'DELETE',
+    // headers: {
+    //   'Content-Type': 'application/json'
+    // }
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } 
+    else {
+      throw response;
+    }
+  })
+}
+
+
+

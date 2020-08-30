@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import { Route, Switch, render, match, Redirect} from 'react-router-dom'
-import {authorizeUser, getMovies, findMovie, getRatings, postRating} from './APICalls'
+import {authorizeUser, getMovies, findMovie, getRatings, postRating, removeRating} from './APICalls'
 
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
@@ -26,6 +26,7 @@ class App extends Component {
     this.findMovie = findMovie
     this.postRating = postRating
     this.getRatings = getRatings
+    this.removeRating = removeRating
   }
 
   componentDidMount() {
@@ -70,16 +71,27 @@ class App extends Component {
     return <Redirect to={`/movies/${id}`} />
   }
 
-  resetState = () => {
+  logoutUser = () => {
     this.setState({user: {}, userRatings:[]})
     return <Redirect to='/' />
   }
 
+  deleteRating = async (movieId, ratingId) => {
+    await removeRating(this.state.user.id, ratingId)
+    const updatedRatings = this.state.userRatings.filter(movie=> movie.movie_id !== movieId)
+    this.setState({ userRatings: updatedRatings })
+    .catch(error => {
+      console.log('error deleting Movie!')
+      this.setState({error: 'Your movie rating has not been deleted'})
+      console.log('stateErrMsg', this.state.error)
+    })
+  }
+
   render() {
-    console.log('this.state.userRatings', this.state.userRatings)
+    // console.log('this.state.userRatings', this.state.userRatings)
     return (
       <main className="App">
-        <Header user={this.state.user} resetter={this.resetState} />
+        <Header user={this.state.user} resetter={this.logoutUser} />
         <Switch>
           <Route 
             exact path='/' 
@@ -106,7 +118,7 @@ class App extends Component {
                 <DetailsPage 
                   movie={this.state.movieInfo} 
                   userId={this.state.user.id} 
-                  // resetter={this.resetState} 
+                  deleteRating={this.deleteRating} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}
                   userRatings={this.state.userRatings}
