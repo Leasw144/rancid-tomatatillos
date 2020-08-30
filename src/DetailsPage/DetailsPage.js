@@ -2,8 +2,7 @@ import React, {Component} from 'react'
 import './DetailsPage.css'
 import {Link} from 'react-router-dom'
 import { render } from 'react-dom';
-// import NumericInput from 'react-numeric-input';
-import { postComment } from '../APICalls'
+import { postComment, getComments } from '../APICalls'
 
 class DetailsPage extends Component {
   constructor(props) {
@@ -14,6 +13,7 @@ class DetailsPage extends Component {
       userComment: '',
     }
     this.postComment = postComment
+    this.getComments = getComments
   }
 
   handleChange = event => {
@@ -32,13 +32,15 @@ class DetailsPage extends Component {
   postUserComment = async (userComment) => {
     console.log('this.props', this.props)
     await this.postComment(this.props.userId, userComment, this.props.userName)
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw response;
-      }
+    .catch(error => {
+      console.log('error commenting on movie!')
+      this.setState({error: 'An error occurred. Your comment was not saved'})
     })
+  }
+
+  getUserComments = async () => {
+    await this.getComments(this.props.userId)
+    .then(data => console.log('dataGetUserComments', data))
   }
 
   render() {
@@ -66,7 +68,9 @@ class DetailsPage extends Component {
             <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
             <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
           </form>
+          <section className='comments-section'>
 
+          </section>
 
 
 

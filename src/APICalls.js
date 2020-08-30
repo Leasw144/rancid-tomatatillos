@@ -117,3 +117,13 @@ export function postComment (userId, userComment, commentAuthor) {
   })
 }
 
+export function getComments(userId) {
+  return fetch(`http://localhost:3001/api/v1/movies/${userId}/comments`)
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
+  })
+}

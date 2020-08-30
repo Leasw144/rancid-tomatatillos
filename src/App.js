@@ -49,6 +49,7 @@ class App extends Component {
     if (data) {
       this.setState({user: data.user})
       this.getRatings(this.state.user.id)
+     
     }
   }
 
