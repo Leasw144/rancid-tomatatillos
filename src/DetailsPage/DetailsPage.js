@@ -3,6 +3,7 @@ import './DetailsPage.css'
 import {Link} from 'react-router-dom'
 import { render } from 'react-dom';
 // import NumericInput from 'react-numeric-input';
+import { postComment } from '../APICalls'
 
 class DetailsPage extends Component {
   constructor(props) {
@@ -10,8 +11,8 @@ class DetailsPage extends Component {
     this.state = {
       userRating: '',
       movieComments: [],
-      // hasRating: false
     }
+    this.postComment = postComment
   }
 
   handleChange = event => {
@@ -25,6 +26,11 @@ class DetailsPage extends Component {
     // } else {
     //   return <p>You have not rated yet.</p>
     // }
+  }
+
+  postUserComment = async (userId, userComment, commentAuthor) => {
+    await this.postComment(this.props.user.id, userComment, commentAuthor)
+      .then(data => console.log(data))
   }
 
   render() {
@@ -46,6 +52,16 @@ class DetailsPage extends Component {
           {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.props.movie.backdrop_path} alt={this.props.movie.title} />
           {this.props.movie.tagline && <p className='tag-line'>{this.props.movie.tagline}</p>}
+
+          <form className='comment-form'>
+            <p>What did you think about {this.props.movie.title}?</p>
+            <textarea></textarea>
+          </form>
+
+
+
+
+
         </section>
         <article className='movie-details'>
           <h1 className='movie-title'>{this.props.movie.title}</h1>
