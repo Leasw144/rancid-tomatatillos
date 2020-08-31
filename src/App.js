@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import { Route, Switch, render, match, Redirect} from 'react-router-dom'
-import {authorizeUser, getMovies, findMovie, getRatings, postRating, removeRating, postComment} from './APICalls'
+import {authorizeUser, getMovies, findMovie, getRatings, postRating, removeRating} from './APICalls'
 
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
@@ -19,7 +19,8 @@ class App extends Component {
       error: '',
       user:{},
       userRatings:[],
-      movieInfo: {}
+      movieInfo: {},
+      movieComments: [],
     }
     this.getMovies = getMovies
     this.authorizeUser = authorizeUser
@@ -27,6 +28,7 @@ class App extends Component {
     this.postRating = postRating
     this.getRatings = getRatings
     this.removeRating = removeRating
+    // this.getComments = getComments
     
   }
 
@@ -89,7 +91,6 @@ class App extends Component {
     // })
   }
 
-
   render() {
     // console.log('this.state.userRatings', this.state.userRatings)
     return (
@@ -126,6 +127,7 @@ class App extends Component {
                   submitRating={this.postUserRating} 
                   error={this.state.error}
                   userRatings={this.state.userRatings}
+                  movieComments={this.state.movieComments}
                 />
               )
             }}

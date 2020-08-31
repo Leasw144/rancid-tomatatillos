@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import './DetailsPage.css'
 import {Link} from 'react-router-dom'
 import { render } from 'react-dom';
-import { postComment, getComments } from '../APICalls'
+import { postComment, getComments} from '../APICalls'  // removed getComments, attempting get it work in App.js
 
 class DetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userRating: '',
-      movieComments: [],
+      // movieComments: [],
       userComment: '',
     }
     this.postComment = postComment
@@ -23,7 +23,7 @@ class DetailsPage extends Component {
   findRating = () => {
     // const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.props.movie.id)
     // if (findMovieIRated) {
-    //   return <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p> 
+    //   return <p><span>My Rating:</ span> {findMovieIRated.rating.toFixed(1)}</p> 
     // } else {
     //   return <p>You have not rated yet.</p>
     // }
@@ -31,33 +31,48 @@ class DetailsPage extends Component {
 
   postUserComment = async (userComment) => {
     console.log('this.props', this.props)
-    await this.postComment(this.props.userId, userComment, this.props.userName)
+    await this.postComment(this.props.movie.id, userComment, this.props.userName)
     .catch(error => {
       console.log('error commenting on movie!')
       this.setState({error: 'An error occurred. Your comment was not saved'})
     })
     this.setState({userComment: ''})
   }
-
+  
   getUserComments = async () => {
-    await this.getComments(this.props.userId)
-    .then(data => console.log('dataGetUserComments', data))
-  }
+  await this.getComments(this.props.movie.movieId)
+  .then(data => this.setState({movieComments: data.comments}))
+    .catch(error => {
+    console.log('Error fetching all movies')
+    this.setState({ error: 'An error has occurred'})
+  })
+}
 
   render() {
-
+    // console.log('propsInDetailsPage', this.props)
+    // console.log('this.props.movie.id', this.props.movie.id)
+    
     const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
-    <option key={number} value={number}>{number}</option>
-    ))
-     const ratedMovie = this.findRating()
-
-     const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.props.movie.id)
-
+      <option key={number} value={number}>{number}</option>
+      ))
+      
+      const comment = this.props.movieComments.map(movie => {
+        console.log('movieInConstComment', movie)
+        if (this.props.movie.id === movie.movieId) {
+          console.log('hello')
+        }
+      })
+      //  const ratedMovie = this.findRating()
+      
+      const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.props.movie.id)
+      console.log('findMovieIRated', findMovieIRated)
+      
     const displayUserRating = findMovieIRated ? <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p> : <p>You have not rated yet.</p>
     
 
 
     return (
+     
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
           {this.props.error && <h1>{this.props.error}</h1>}
@@ -70,7 +85,8 @@ class DetailsPage extends Component {
             <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
           </form>
           <section className='comments-section'>
-
+            <p>{this.props.userName} says:</p>
+              <p>{comment}</p>
           </section>
 
 

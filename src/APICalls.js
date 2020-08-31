@@ -83,13 +83,11 @@ export function removeRating(userId,  ratingId) {
   return fetch(`${rootURL}/users/${userId}/ratings/${ratingId}`, 
   {
     method: 'DELETE',
-    // headers: {
-    //   'Content-Type': 'application/json'
-    // }
+
   })
   .then(response => {
     if (response.ok) {
-      return response.json()
+      return response
     } 
     else {
       throw response;
@@ -97,8 +95,9 @@ export function removeRating(userId,  ratingId) {
   })
 }
 
-export function postComment (userId, userComment, commentAuthor) {
-  return fetch(`http://localhost:3001/api/v1/movies/${userId}/comments`, {
+export function postComment (movieId, userComment, commentAuthor) {
+  console.log('movieID in APIcalls', movieId)
+  return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -117,8 +116,8 @@ export function postComment (userId, userComment, commentAuthor) {
   })
 }
 
-export function getComments(userId) {
-  return fetch(`http://localhost:3001/api/v1/movies/${userId}/comments`)
+export function getComments(movieId) {
+  return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
   .then(response => {
     if (response.ok) {
       return response.json()
