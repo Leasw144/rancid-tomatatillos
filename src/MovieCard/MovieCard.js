@@ -9,6 +9,8 @@ function MovieCard(props) {
   // console.log('props.userRatings', props.userRatings)
     let findMovieIRated = props.userRatings.find(movie => movie.movie_id === props.id)
     // console.log('findMovieIRated', findMovieIRated)
+  // const favoriteMovie = props.favorites.find(moviesFavoritedId => moviesFavoritedId === props.id)
+  // console.log('favorite movie', props.favorites)
     return (
       // <Link 
       //   to={`/movies/${props.id}`} 
@@ -29,6 +31,7 @@ function MovieCard(props) {
           <p><span>Average Rating:</span> {props.rating.toFixed(1)}</p>
           
           {findMovieIRated && <p><span>Your Rating:</span>{findMovieIRated.rating}</p>}
+        {/* <button onClick={() => props.toggleFavorite(props.id)}>{favoriteMovie ? '♥️' : '♡'}</button> */}
         </article>
       // </Link>
     )

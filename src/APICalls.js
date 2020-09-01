@@ -120,3 +120,34 @@ export function getComments(movieId) {
     }
   })
 }
+
+export const postFavorite = (movieId) => {
+  return fetch('http://localhost:3001/api/v1/favorites', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: movieId,
+    })
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
+    })
+}
+
+export const getFavorites = () => {
+  return fetch('http://localhost:3001/api/v1/favorites')
+  .then(response => {
+    if(response.ok) {
+      console.log('getem', response)
+      return response.json()
+    } else {
+      throw response
+    }
+  })
+}

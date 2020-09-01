@@ -84,23 +84,64 @@ class DetailsPage extends Component {
             {comments}
           </section>
         </section>
+
         <article className='movie-details'>
           <h1 className='movie-title'>{this.state.movieInfo.title}</h1>
           <h2>Description:</h2>
-          {this.state.movieInfo.overview && <p><span>Overview:</span> {this.state.movieInfo.overview}</p>}
-          {this.state.movieInfo.release_date && <p><span>Release Date:</span> {this.state.movieInfo.release_date}</p>}
-          {this.state.movieInfo.runtime > 0 && <p><span>Runtime:</span> {this.state.movieInfo.runtime}</p>}
-          {this.state.movieInfo.average_rating > 0 && <p><span>Average Rating:</span> {this.state.movieInfo.average_rating.toFixed(1)}</p>}
+          {
+            this.state.movieInfo.overview && 
+              <p>
+                <span>Overview:</span> {this.state.movieInfo.overview}
+              </p>
+          }
+          {
+            this.state.movieInfo.release_date && 
+              <p>
+                <span>Release Date:</span> {this.state.movieInfo.release_date}
+              </p>
+          }
+          {
+            this.state.movieInfo.runtime > 0 && 
+              <p>
+                <span>Runtime:</span> {this.state.movieInfo.runtime}
+              </p>
+          }
+          {
+            this.state.movieInfo.average_rating > 0 && 
+            <p>
+              <span>Average Rating:</span> {this.state.movieInfo.average_rating.toFixed(1)}
+            </p>
+          }
           {displayUserRating}
-          {this.state.movieInfo.budget > 0 && <p><span>Budget:</span> {this.state.movieInfo.budget}</p>}
-          {this.state.movieInfo.revenue > 0 && <p><span>Revenue:</span> {this.state.movieInfo.revenue}</p>}
+          {
+            this.state.movieInfo.budget > 0 && 
+            <p>
+              <span>Budget:</span> {this.state.movieInfo.budget}
+            </p>
+          }
+          {
+            this.state.movieInfo.revenue > 0 && 
+              <p>
+                <span>Revenue:</span> {this.state.movieInfo.revenue}
+              </p>
+          }
          <form className='rating-form'>
-            <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
+            <select  
+              name='userRating' 
+              value={this.state.userRating} 
+              onChange={this.handleChange}
+            >
               {ratingOptions}
             </select>
 
-            {findMovieIRated ? <button type='button' onClick={() => this.props.deleteRating(findMovieIRated.movie_id, findMovieIRated.id)}>Delete Rating</button> : <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.state.movieInfo.id, this.state.userRating)}>Submit Rating</button>}
-
+            {findMovieIRated ? 
+              <button type='button' onClick={() => this.props.deleteRating(findMovieIRated.movie_id, findMovieIRated.id)}>
+                Delete Rating
+              </button> : 
+              <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.state.movieInfo.id, this.state.userRating)}>
+                Submit Rating
+              </button>
+            }
          </form>
           <Link  to='/'><button type="button" className='home-btn' >Return to Home</button></Link>        
          </article>
@@ -113,31 +154,6 @@ class DetailsPage extends Component {
 export default DetailsPage
 
 
-{/* <Route
-          path="/destinations/:destinationName"
-          render={({ match }) => {
-            return (
-              <div className="destinationDetails">
-                <Header />
-                <div className="bread-crumb-container">
-                  <Link className="breadCrumbLink" to="/destinations">
-                    <p className="main-bread-crumb">destinations </p>
-                  </Link>{" "}
-                  <p className="main-bread-crumb">
-                    > {match.params.destinationName}
-                  </p>
-                </div>
-                <div className="destination-details-container">
-                  <DestinationDetails
-                    selectedDestination={selectedDestination}
-                    setDestinations={setDestinations}
-                    destinations={destinations}
-                  />
-                </div>
-              </div>
-            );
-          }}
-        /> */}
 
 
 
