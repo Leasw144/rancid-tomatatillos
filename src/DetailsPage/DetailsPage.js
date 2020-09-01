@@ -159,6 +159,12 @@ DetailsPage.protoTypes = {
   movieInfo: PropTypes.object.isRequired
 }
 
+DetailsPage.defaultProps = {
+  userRating: '',
+  movieComments: [],
+  userComment: '',
+  movieInfo: {}
+}
 export default DetailsPage
 
 

@@ -197,5 +197,14 @@ App.propTypes = {
   favorites: PropTypes.array.isRequired,
 }
 
+App.defaultProps = {
+  name: '',
+  movies: [],
+  error: '',
+  user: {},
+  userRatings: [],
+  favorites: []
+}
+
 
 export default App;

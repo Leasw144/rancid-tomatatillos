@@ -55,4 +55,8 @@ Login.propTypes = {
   password: PropTypes.string.isRequired
 }
 
+Login.defaultProps = {
+  username: '',
+  password: ''
+}
 export default Login
