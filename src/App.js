@@ -126,8 +126,7 @@ class App extends Component {
             render={() => {
               return (
                 <CardSection 
-                  allMovies={this.state.movies} 
-                  // showInfo={this.showInfo}
+                  movies={this.state.movies} 
                   userRatings={this.state.userRatings}
                   favorites={this.state.favorites}
                   toggleFavorite={this.toggleFavorite}
@@ -148,12 +147,11 @@ class App extends Component {
                   favorites={this.state.favorites}
                   toggleFavorite={this.toggleFavorite}
                   userInfo={this.state.user}
-                  favoriteMovies={this.filterFavs}
+                  movies={this.filterFavs()}
                 />
               )
             }}
-          
-            
+ 
           />
           <Route 
             exact path='/login' 
