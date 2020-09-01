@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './DetailsPage.css'
 import {Link} from 'react-router-dom'
 import { render } from 'react-dom';
-import { postComment, getComments, findMovie} from '../APICalls'  // removed getComments, attempting get it work in App.js
+import { postComment, findMovie, getComments} from '../APICalls'  // removed getComments, attempting get it work in App.js
 
 class DetailsPage extends Component {
   constructor(props) {
@@ -13,10 +13,9 @@ class DetailsPage extends Component {
       userComment: '',
       movieInfo: {},
     }
-    
     this.postComment = postComment
-    this.getComments = getComments
     this.findMovie = findMovie
+    this.getComments = getComments
   }
 
   componentDidMount() {
@@ -29,10 +28,8 @@ class DetailsPage extends Component {
   }
 
   postUserComment = async (userComment) => {
-    console.log('this.props', this.props)
     try {
       const {newComment} = await this.postComment(this.state.movieInfo.id, userComment, this.props.userName)
-      
       this.setState({
         userComment: '',
         movieComments:[...this.state.movieComments, newComment]
@@ -46,74 +43,47 @@ class DetailsPage extends Component {
   getMovieDetails = async (movieId) => {
     try {
       const { movie } = await this.findMovie(movieId)
-      console.log('movie..', movie)
       this.setState({movieInfo: movie})
     } catch (error) {
-      
     }
   }
 
   getMovieComments = async (movieId) => {
     try {
       const {comments} = await this.getComments(movieId)
-      console.log('comments', comments)
-     
       this.setState({movieComments: comments})
     } catch (error) {
-      
+      this.setState({error: 'An error occurred getting movie comments.'})
     }
-    // await this.getComments(this.state.movieInfo.movieId)
-    // .then(data => this.setState({movieComments: data.comments}))
-    //   .catch(error => {
-    //   console.log('Error fetching all movies')
-    //   this.setState({ error: 'An error has occurred'})
-    // })
   }
 
   render() {
-    // console.log('propsInDetailsPage', this.props)
-    // console.log('this.state.movieInfo.id', this.state.movieInfo.id)
-    
     const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
       <option key={number} value={number}>{number}</option>
       ))
-      
-      const comments = this.state.movieComments.map(movie => {
-      return (<div>
-              {movie.author}
-              {movie.comment}
+    const comments = this.state.movieComments.map(movie => {
+    return (<div>
+              <p>{movie.author} says: {movie.comment}</p>
             </div>)
-      })
-      //  const ratedMovie = this.findRating()
-      
+    })
       const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
-      console.log('findMovieIRated', findMovieIRated)
-      
     const displayUserRating = findMovieIRated ? <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p> : <p>You have not rated yet.</p>
-    
-
-
     return (
-     
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
           {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.state.movieInfo.backdrop_path} alt={this.state.movieInfo.title} />
           {this.state.movieInfo.tagline && <p className='tag-line'>{this.state.movieInfo.tagline}</p>}
-
           <form className='comment-form'>
             <p>What did you think about {this.state.movieInfo.title}?</p>
             <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
             <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
           </form>
           <section className='comments-section'>
-            {/* <p>{this.props.userName} says:</p> */}
-              <p>{comments}</p>
+            <p>Movie comments:</p>
+            {console.log('comments', comments)}
+            <p>{comments}</p>
           </section>
-
-
-
-
         </section>
         <article className='movie-details'>
           <h1 className='movie-title'>{this.state.movieInfo.title}</h1>

@@ -63,7 +63,7 @@
   display: flex;
   flex-direction: column;
   border: 2px solid #8b3746;
-  width: 25rem;
+  /* width: 25rem; */
   margin-left: 15%;
   padding: 10px;
   color: #E8EDDF;
@@ -73,10 +73,18 @@
 .comment-form textarea {
   height: 60px;
   margin-bottom: 20px;
-  width: 22rem;
+  width: 75%;
 }
 
 .comment-form button {
   width: 12rem;
   padding: .4rem .5rem;
+}
+
+.comments-section {
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid cornflowerblue;
+    margin-left: 15%;
 }
