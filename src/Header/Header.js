@@ -1,8 +1,7 @@
 import React from 'react'
 import './Header.css'
 import tomato from '../assets/tomato.jpg'
-import { Link, NavLink } from 'react-browser-router'
-import Login from '../Login/Login'
+import { Link } from 'react-browser-router'
 
 function Header(props) {
   return (
@@ -12,12 +11,12 @@ function Header(props) {
         <h1>
           Rancid Tomatatillos
         </h1>
-        {props.user.name && <h2>Welcome {props.user.name}!</h2>}
+        {props.user.name && <h2>Welcome { props.user.name }!</h2>}
       </div>
 
       {props.user.name ? 
       <Link to='/'>
-        <button type='button' onClick={props.resetter}>Log out</button>
+        <button type='button' onClick={ props.resetter }>Log out</button>
       </Link> : 
       <Link to='/login' > 
         <button>Log in</button>
