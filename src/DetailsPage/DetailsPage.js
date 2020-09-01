@@ -79,10 +79,12 @@ class DetailsPage extends Component {
       ))
       
       const comments = this.state.movieComments.map(movie => {
-      return (<div>
-              {movie.author}
-              {movie.comment}
-            </div>)
+        return (
+          <div>
+            {movie.author}
+            {movie.comment}
+          </div>
+        )
       })
       //  const ratedMovie = this.findRating()
       
@@ -110,11 +112,8 @@ class DetailsPage extends Component {
             {/* <p>{this.props.userName} says:</p> */}
               <p>{comments}</p>
           </section>
-
-
-
-
         </section>
+
         <article className='movie-details'>
           <h1 className='movie-title'>{this.state.movieInfo.title}</h1>
           <h2>Description:</h2>
@@ -144,31 +143,6 @@ class DetailsPage extends Component {
 export default DetailsPage
 
 
-{/* <Route
-          path="/destinations/:destinationName"
-          render={({ match }) => {
-            return (
-              <div className="destinationDetails">
-                <Header />
-                <div className="bread-crumb-container">
-                  <Link className="breadCrumbLink" to="/destinations">
-                    <p className="main-bread-crumb">destinations </p>
-                  </Link>{" "}
-                  <p className="main-bread-crumb">
-                    > {match.params.destinationName}
-                  </p>
-                </div>
-                <div className="destination-details-container">
-                  <DestinationDetails
-                    selectedDestination={selectedDestination}
-                    setDestinations={setDestinations}
-                    destinations={destinations}
-                  />
-                </div>
-              </div>
-            );
-          }}
-        /> */}
 
 
 
