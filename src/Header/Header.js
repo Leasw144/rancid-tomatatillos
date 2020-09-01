@@ -15,10 +15,13 @@ function Header(props) {
         {props.user.name && <h2>Welcome {props.user.name}!</h2>}
       </div>
 
-      {props.user.name ? <button type='button' onClick={props.resetter}>Log out</button> : 
-      <NavLink to='/login' > 
+      {props.user.name ? 
+      <Link to='/'>
+        <button type='button' onClick={props.resetter}>Log out</button>
+      </Link> : 
+      <Link to='/login' > 
         <button>Log in</button>
-      </NavLink>}
+      </Link>}
     </header>
   )
 }
