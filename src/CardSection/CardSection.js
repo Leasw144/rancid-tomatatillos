@@ -18,7 +18,8 @@ function CardSection(props) {
       favoriteMovie = props.favorites.find(moviesFavoritedId => moviesFavoritedId === movie.id)
       return (
         <div key={movie.id}>
-          <button type='button' onClick={() => props.toggleFavorite(movie.id)}>{favoriteMovie ? '♥️' :'♡'}</button>
+          {props.userInfo.name && <button type='button' onClick={() => props.toggleFavorite(movie.id)}>{favoriteMovie ? '♥️' : '♡'}</button>}
+          
           <Link to={`/movies/${movie.id}`} >
             <MovieCard
               id={movie.id}
