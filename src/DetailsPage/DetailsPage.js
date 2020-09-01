@@ -62,18 +62,9 @@ class DetailsPage extends Component {
     } catch (error) {
       this.setState({ error: 'An error occurred. Unable to load movie comments,' })
     }
-    // await this.getComments(this.state.movieInfo.movieId)
-    // .then(data => this.setState({movieComments: data.comments}))
-    //   .catch(error => {
-    //   console.log('Error fetching all movies')
-    //   this.setState({ error: 'An error has occurred'})
-    // })
   }
 
-  render() {
-    // console.log('propsInDetailsPage', this.props)
-    // console.log('this.state.movieInfo.id', this.state.movieInfo.id)
-    
+  render() { 
     const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
       <option key={number} value={number}>{number}</option>
       ))
@@ -86,7 +77,6 @@ class DetailsPage extends Component {
           </div>
         )
       })
-      //  const ratedMovie = this.findRating()
       
       const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
       console.log('findMovieIRated', findMovieIRated)
@@ -109,7 +99,6 @@ class DetailsPage extends Component {
             <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
           </form>
           <section className='comments-section'>
-            {/* <p>{this.props.userName} says:</p> */}
               <p>{comments}</p>
           </section>
         </section>
@@ -148,14 +137,29 @@ class DetailsPage extends Component {
               <span>Budget:</span> {this.state.movieInfo.budget}
             </p>
           }
-          {this.state.movieInfo.revenue > 0 && <p><span>Revenue:</span> {this.state.movieInfo.revenue}</p>}
+          {
+            this.state.movieInfo.revenue > 0 && 
+              <p>
+                <span>Revenue:</span> {this.state.movieInfo.revenue}
+              </p>
+          }
          <form className='rating-form'>
-            <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
+            <select  
+              name='userRating' 
+              value={this.state.userRating} 
+              onChange={this.handleChange}
+            >
               {ratingOptions}
             </select>
 
-            {findMovieIRated ? <button type='button' onClick={() => this.props.deleteRating(findMovieIRated.movie_id, findMovieIRated.id)}>Delete Rating</button> : <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.state.movieInfo.id, this.state.userRating)}>Submit Rating</button>}
-
+            {findMovieIRated ? 
+              <button type='button' onClick={() => this.props.deleteRating(findMovieIRated.movie_id, findMovieIRated.id)}>
+                Delete Rating
+              </button> : 
+              <button type="button" onClick={() => this.props.submitRating(this.props.userId, this.state.movieInfo.id, this.state.userRating)}>
+                Submit Rating
+              </button>
+            }
          </form>
           <Link  to='/'><button type="button" className='home-btn' >Return to Home</button></Link>        
          </article>
