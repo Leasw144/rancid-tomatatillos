@@ -9,17 +9,19 @@ function CardSection(props) {
   if (props.allMovies.length > 0) {
     movies = props.allMovies.map(movie => {
       return (
-        <Link to={`/movies/${movie.id}`} render={DetailsPage}>
+        <Link  key={movie.id} to={`/movies/${movie.id}`} >
+          {/* render={DetailsPage} */}
           <MovieCard
-            key={movie.id}
+            // key={movie.id}
             id={movie.id}
             img={movie.poster_path}
             title={movie.title}
             releaseDate={movie.release_date}
             rating={movie.average_rating}
-            click={props.showInfo}
+            // click={props.showInfo}
             userRatings={props.userRatings}
           />
+          
         </Link>
       )
     })

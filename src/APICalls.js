@@ -64,32 +64,24 @@ export function postRating(userId, movieId, userRating) {
       rating: Number(userRating),
     })
   })
-  // .then(response => response.json())
-  // .then(data => this.setState({userRatings: data.userRating}))
-  // .catch(error => {
-  //   console.log('Error fetching user')
-  //   this.setState({error: 'Please check your login information'})
-  // })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw response;
-      }
-    })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
+  })
 }
 
 export function removeRating(userId,  ratingId) {
   return fetch(`${rootURL}/users/${userId}/ratings/${ratingId}`, 
   {
     method: 'DELETE',
-    // headers: {
-    //   'Content-Type': 'application/json'
-    // }
+
   })
   .then(response => {
     if (response.ok) {
-      return response.json()
+      return response
     } 
     else {
       throw response;
@@ -97,5 +89,34 @@ export function removeRating(userId,  ratingId) {
   })
 }
 
+export function postComment (movieId, userComment, commentAuthor) {
+  console.log('movieID in APIcalls', movieId)
+  return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify({
+        comment: userComment,
+        author: commentAuthor,
+      })
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
+  })
+}
 
-
+export function getComments(movieId) {
+  return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
+  })
+}

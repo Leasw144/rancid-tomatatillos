@@ -19,7 +19,8 @@ class App extends Component {
       error: '',
       user:{},
       userRatings:[],
-      movieInfo: {}
+      // movieInfo: {},
+      // movieComments: [],
     }
     this.getMovies = getMovies
     this.authorizeUser = authorizeUser
@@ -27,6 +28,8 @@ class App extends Component {
     this.postRating = postRating
     this.getRatings = getRatings
     this.removeRating = removeRating
+    // this.getComments = getComments
+    
   }
 
   componentDidMount() {
@@ -48,6 +51,7 @@ class App extends Component {
     if (data) {
       this.setState({user: data.user})
       this.getRatings(this.state.user.id)
+     
     }
   }
 
@@ -60,16 +64,16 @@ class App extends Component {
     })
   }
 
-  showInfo = (id) =>{
-    this.findMovie(id)
-    .then( (data) =>  this.setState({movieInfo: data.movie}))
-    .catch(error => {
-      console.log('error Fetching Movie!')
-      this.setState({error: 'Your movie has not been found! Please return home.'})
-      console.log('stateErrMsg', this.state.error)
-    })
-    return <Redirect to={`/movies/${id}`} />
-  }
+  // showInfo = (id) =>{
+  //   this.findMovie(id)
+  //   .then( (data) =>  this.setState({movieInfo: data.movie}))
+  //   .catch(error => {
+  //     console.log('error Fetching Movie!')
+  //     this.setState({error: 'Your movie has not been found! Please return home.'})
+  //     console.log('stateErrMsg', this.state.error)
+  //   })
+  //   return <Redirect to={`/movies/${id}`} />
+  // }
 
   logoutUser = () => {
     this.setState({user: {}, userRatings:[]})
@@ -98,7 +102,7 @@ class App extends Component {
             render={() => {
              return <CardSection 
                 allMovies={this.state.movies} 
-                showInfo={this.showInfo}
+                // showInfo={this.showInfo}
                 userRatings={this.state.userRatings}
               />
             }}
@@ -113,15 +117,18 @@ class App extends Component {
             />}} />
           <Route 
             exact path='/movies/:id' 
-            render={() => {
+            render={({ match }) => {
               return (
                 <DetailsPage 
-                  movie={this.state.movieInfo} 
+                  movieId={match.params.id}
+                  // movie={this.state.movieInfo} 
                   userId={this.state.user.id} 
+                  userName={this.state.user.name}
                   deleteRating={this.deleteRating} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}
                   userRatings={this.state.userRatings}
+                  // movieComments={this.state.movieComments}
                 />
               )
             }}

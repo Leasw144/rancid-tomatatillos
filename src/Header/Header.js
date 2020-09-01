@@ -16,7 +16,8 @@ function Header(props) {
       </div>
 
       {props.user.name ? <button type='button' onClick={props.resetter}>Log out</button> : 
-      <NavLink to='/login' render={Login}>
+      <NavLink to='/login' >
+        {/* render={Login} */}
         <button>Log in</button>
       </NavLink>}
     </header>
