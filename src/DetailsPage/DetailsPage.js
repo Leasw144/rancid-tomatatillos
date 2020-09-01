@@ -62,7 +62,7 @@ class DetailsPage extends Component {
       <option key={number} value={number}>{number}</option>
       ))
     const comments = this.state.movieComments.map(movie => {
-    return (<div>
+    return (<div key={movie.id}>
               {movie.author && movie.comment ? <p><span>{movie.author}:</span> {movie.comment}</p> : <p>{movie.comment}</p>}
               {/* <p><span>{movie.author}:</span> {movie.comment}</p> */}
               {/* <p>{movie.comment}</p> */}
@@ -92,7 +92,7 @@ class DetailsPage extends Component {
 
           <section className='comments-section'>
             <p><span>Movie comments:</span></p>
-            <p>{comments}</p>
+            {comments}
           </section>
 
 
