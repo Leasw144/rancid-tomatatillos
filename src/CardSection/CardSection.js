@@ -7,9 +7,14 @@ import DetailsPage from '../DetailsPage/DetailsPage'
 function CardSection(props) {
   console.log('Your favs', props)
   // const filtered = props.filterFavs()
+
   let movies, favoriteMovie;
-  if (props.allMovies.length > 0) {
-    movies = props.allMovies.map(movie => {
+
+  
+
+
+  if (props.movies.length > 0) {
+    movies = props.movies.map(movie => {
       favoriteMovie = props.favorites.find(moviesFavoritedId => moviesFavoritedId === movie.id)
       return (
         <div key={movie.id}>
