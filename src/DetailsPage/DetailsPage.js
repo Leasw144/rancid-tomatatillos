@@ -13,6 +13,7 @@ class DetailsPage extends Component {
       userComment: '',
       movieInfo: {},
     }
+    
     this.postComment = postComment
     this.getComments = getComments
     this.findMovie = findMovie
@@ -21,11 +22,10 @@ class DetailsPage extends Component {
   componentDidMount() {
     this.getMovieDetails(this.props.movieId)
     this.getMovieComments(this.props.movieId)
-
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value})
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   postUserComment = async (userComment) => {

@@ -21,6 +21,7 @@ function CardSection(props) {
             // click={props.showInfo}
             userRatings={props.userRatings}
           />
+          
         </Link>
       )
     })
