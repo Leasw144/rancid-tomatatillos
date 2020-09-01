@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import './DetailsPage.css'
 import {Link} from 'react-router-dom'
-import { render } from 'react-dom';
-import { postComment, getComments, findMovie} from '../APICalls'  // removed getComments, attempting get it work in App.js
+// import { render } from 'react-dom';
+import { postComment, findMovie, getComments} from '../APICalls'  
 
 class DetailsPage extends Component {
   constructor(props) {
@@ -13,10 +13,9 @@ class DetailsPage extends Component {
       userComment: '',
       movieInfo: {},
     }
-    
     this.postComment = postComment
-    this.getComments = getComments
     this.findMovie = findMovie
+    this.getComments = getComments
   }
 
   componentDidMount() {
@@ -29,10 +28,8 @@ class DetailsPage extends Component {
   }
 
   postUserComment = async (userComment) => {
-    console.log('this.props', this.props)
     try {
       const {newComment} = await this.postComment(this.state.movieInfo.id, userComment, this.props.userName)
-      
       this.setState({
         userComment: '',
         movieComments:[...this.state.movieComments, newComment]
@@ -46,60 +43,45 @@ class DetailsPage extends Component {
   getMovieDetails = async (movieId) => {
     try {
       const { movie } = await this.findMovie(movieId)
-      console.log('movie..', movie)
       this.setState({movieInfo: movie})
     } catch (error) {
-      this.setState({ error: 'An error occurred. Unable to load movie details' })
     }
   }
 
   getMovieComments = async (movieId) => {
     try {
       const {comments} = await this.getComments(movieId)
-      console.log('comments', comments)
-     
       this.setState({movieComments: comments})
     } catch (error) {
-      this.setState({ error: 'An error occurred. Unable to load movie comments,' })
+      this.setState({error: 'An error occurred getting movie comments.'})
     }
   }
 
-  render() { 
+  render() {
     const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
       <option key={number} value={number}>{number}</option>
       ))
-      
-      const comments = this.state.movieComments.map(movie => {
-        return (
-          <div>
-            {movie.author}
-            {movie.comment}
-          </div>
-        )
-      })
-      
-      const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
-      console.log('findMovieIRated', findMovieIRated)
-      
+    const comments = this.state.movieComments.map(movie => {
+    return (<div key={movie.id}> {movie.author && movie.comment ? <p><span>{movie.author}:</span> {movie.comment}</p> : <p>{movie.comment}</p>}
+            </div>)
+    })
+    const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
     const displayUserRating = findMovieIRated ? <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p> : <p>You have not rated yet.</p>
-    
-
-
     return (
-     
       <section className='DetailsPage'>
         <section className='backdrop-parent'>
           {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.state.movieInfo.backdrop_path} alt={this.state.movieInfo.title} />
           {this.state.movieInfo.tagline && <p className='tag-line'>{this.state.movieInfo.tagline}</p>}
-
-          <form className='comment-form'>
-            <p>What did you think about {this.state.movieInfo.title}?</p>
-            <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
-            <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
-          </form>
+          {this.props.userName && 
+           <form className='comment-form'>
+           <p>What did you think about {this.state.movieInfo.title}?</p>
+           <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
+           <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
+         </form>}
           <section className='comments-section'>
-              <p>{comments}</p>
+            <p className='movie-comments-title'><span>Movie comments:</span></p>
+            {comments}
           </section>
         </section>
 

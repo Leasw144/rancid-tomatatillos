@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React from 'react'
 import MovieCard from '../MovieCard/MovieCard'
 import './CardSection.css'
-import { Link, render } from 'react-browser-router'
+import { Link } from 'react-browser-router'
 import DetailsPage from '../DetailsPage/DetailsPage'
 
 function CardSection(props) {
