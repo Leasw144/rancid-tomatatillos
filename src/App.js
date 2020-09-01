@@ -7,6 +7,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import DetailsPage from './DetailsPage/DetailsPage'
 import Login from './Login/Login'
+import Favorite from './Favorite/Favorite'
 
 import './App-resources/App.css';
 import './assets/tomato.jpg'
@@ -41,6 +42,7 @@ class App extends Component {
       console.log('Error fetching all movies')
       this.setState({ error: 'An error has occurred'})
     })
+
   }
 
   getUser = async (username, password)  => {
@@ -53,6 +55,8 @@ class App extends Component {
     if (data) {
       this.setState({user: data.user})
       this.getRatings(this.state.user.id)
+      await this.findFavorites()
+      console.log('your stuff is here', this.state)
      
     }
   }
@@ -67,18 +71,24 @@ class App extends Component {
   }
 
   toggleFavorite = async (movieId) => {
-    await this.postFavorite(movieId)
-      .then(data => console.log('this is toggleFavorites', data))
-      .then(data => this.setState({favorites: data}))
-      .catch(error => {
-        console.log('Error fetching Favorites')
-        this.setState({ error: 'Error posting favorites' })
-      })
+    try {
+      await this.postFavorite(movieId)
+      const allFavs = await this.findFavorites()
+      await console.log('allFavs', allFavs)
+    } catch (error) {
+      console.log('Error fetching Favorites')
+      this.setState({ error: 'Error posting favorites' })
+    }
   }
 
   findFavorites = async () => {
     await getFavorites() 
     .then(data => this.setState({favorites: data}))
+    .then(console.log('right here!!!!', this.state))
+    .catch(error => {
+      console.log(error)
+      this.setState({ error: 'Error posting favorites' })
+    })
   }
   // showInfo = (id) =>{
   //   this.findMovie(id)
@@ -107,6 +117,17 @@ class App extends Component {
     // })
   }
 
+  findFavs = () => {
+    return this.state.movies.reduce((favoriteMovies, movie) => {
+      this.state.favorites.forEach(favoritedMovieId => {
+        if (favoritedMovieId === movie.id) 
+          favoritedMovieId.push(movie)
+          console.log('fuck yeah')
+      })
+      return favoriteMovies
+    },[])
+  }
+
   render() {
     // console.log('this.state.userRatings', this.state.userRatings)
     return (
@@ -124,10 +145,28 @@ class App extends Component {
                   favorites={this.state.favorites}
                   toggleFavorite={this.toggleFavorite}
                   userInfo={this.state.user}
+                  favoriteMovies={this.findFavs}
                 />
               )
             }}
           />
+          {/* <Route
+            exact path='/favorites'
+            render={() => {
+              return (
+                <Favorite
+                  findFavorites={this.findFavorites}
+                  movies={this.state.movies}
+                  userRatings={this.state.userRatings}
+                  favorites={this.state.favorites}
+                  toggleFavorite={this.toggleFavorite}
+                  userInfo={this.state.user}
+                />
+              )
+            }}
+          
+            
+          /> */}
           <Route 
             exact path='/login' 
             render={() => {
@@ -158,7 +197,7 @@ class App extends Component {
               )
             }}
           />
-  
+   
         </Switch>
       </main>
     )
