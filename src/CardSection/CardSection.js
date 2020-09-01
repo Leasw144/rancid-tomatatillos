@@ -9,27 +9,39 @@ function CardSection(props) {
   if (props.allMovies.length > 0) {
     movies = props.allMovies.map(movie => {
       return (
-        <Link  key={movie.id} to={`/movies/${movie.id}`} >
-          {/* render={DetailsPage} */}
-          <MovieCard
-            // key={movie.id}
-            id={movie.id}
-            img={movie.poster_path}
-            title={movie.title}
-            releaseDate={movie.release_date}
-            rating={movie.average_rating}
-            // click={props.showInfo}
-            userRatings={props.userRatings}
-          />
+        <div>
           
-        </Link>
+          <button type='button'>'♡'</button>
+          <Link  key={movie.id} to={`/movies/${movie.id}`} >
+            {/* render={DetailsPage} */}
+            <MovieCard
+              // key={movie.id}
+              id={movie.id}
+              img={movie.poster_path}
+              title={movie.title}
+              releaseDate={movie.release_date}
+              rating={movie.average_rating}
+              // click={props.showInfo}
+              userRatings={props.userRatings}
+              favorites={props.favorites}
+              toggleFavorite={props.toggleFavorite}
+              userInfo={props.userInfo}
+            />
+            
+          </Link>
+        </div>
       )
     })
   }
   return (
-    <section className='card-section'>
-      {movies}
-    </section>
+    <main>
+      <nav>
+        {props.userInfo.name && <button type='button'>filter</button>}
+      </nav>
+      <section className='card-section'>
+        {movies}
+      </section>
+    </main>
   )
 }
 
