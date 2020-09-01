@@ -6,38 +6,36 @@ import DetailsPage from '../DetailsPage/DetailsPage'
 
 function CardSection(props) {
   console.log('Your favs', props)
+  // const filtered = props.filterFavs()
   let movies, favoriteMovie;
   if (props.allMovies.length > 0) {
     movies = props.allMovies.map(movie => {
       favoriteMovie = props.favorites.find(moviesFavoritedId => moviesFavoritedId === movie.id)
       return (
-        <div>
+        <div key={movie.id}>
           <button type='button' onClick={() => props.toggleFavorite(movie.id)}>{favoriteMovie ? '♥️' :'♡'}</button>
-          <Link  key={movie.id} to={`/movies/${movie.id}`} >
-            {/* render={DetailsPage} */}
+          <Link to={`/movies/${movie.id}`} >
             <MovieCard
-              // key={movie.id}
               id={movie.id}
               img={movie.poster_path}
               title={movie.title}
               releaseDate={movie.release_date}
               rating={movie.average_rating}
-              // click={props.showInfo}
               userRatings={props.userRatings}
               favorites={props.favorites}
               toggleFavorite={props.toggleFavorite}
               userInfo={props.userInfo}
-            />
-            
+            />   
           </Link>
         </div>
       )
     })
   }
+
   return (
     <main>
       <Link to={'/favorites'}>
-        {props.userInfo.name && <button type='button' onClick={props.favoriteMovies}>filter</button>}
+        {props.userInfo.name && <button type='button' onClick={props.filterFavorites}>filter</button>}
       </Link>
       <section className='card-section'>
         {movies}

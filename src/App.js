@@ -84,24 +84,15 @@ class App extends Component {
   }
 
   findFavorites = async () => {
-    await getFavorites() 
-    .then(data => this.setState({favorites: data}))
-    .then(console.log('right here!!!!', this.state))
-    .catch(error => {
+    try {
+      const allFavs = await getFavorites() 
+      this.setState({favorites: allFavs})
+      console.log('right here!!!!', this.state)
+    } catch(error) {
       console.log(error)
       this.setState({ error: 'Error posting favorites' })
-    })
+    }
   }
-  // showInfo = (id) =>{
-  //   this.findMovie(id)
-  //   .then( (data) =>  this.setState({movieInfo: data.movie}))
-  //   .catch(error => {
-  //     console.log('error Fetching Movie!')
-  //     this.setState({error: 'Your movie has not been found! Please return home.'})
-  //     console.log('stateErrMsg', this.state.error)
-  //   })
-  //   return <Redirect to={`/movies/${id}`} />
-  // }
 
   logoutUser = () => {
     this.setState({user: {}, userRatings:[], favorites: []})
@@ -112,26 +103,20 @@ class App extends Component {
     await removeRating(this.state.user.id, ratingId)
     const updatedRatings = this.state.userRatings.filter(movie=> movie.movie_id !== movieId)
     this.setState({ userRatings: updatedRatings })
-    // .catch(error => {
-    //   console.log('error deleting Movie!')
-    //   this.setState({error: 'Your movie rating has not been deleted'})
-    //   console.log('stateErrMsg', this.state.error)
-    // })
   }
 
-  findFavs = () => {
+  filterFavs = () => {
     return this.state.movies.reduce((favoriteMovies, movie) => {
       this.state.favorites.forEach(favoritedMovieId => {
         if (favoritedMovieId === movie.id) 
-          favoritedMovieId.push(movie)
-          console.log('fuck yeah')
-      })
+          favoriteMovies.push(movie)
+        })
+        console.log('fuck yeah', favoriteMovies)
       return favoriteMovies
     },[])
   }
 
   render() {
-    // console.log('this.state.userRatings', this.state.userRatings)
     return (
       <main className="App">
         <Header user={this.state.user} resetter={this.logoutUser} />
@@ -152,23 +137,24 @@ class App extends Component {
               )
             }}
           />
-          {/* <Route
+          <Route
             exact path='/favorites'
             render={() => {
               return (
-                <Favorite
-                  findFavorites={this.findFavorites}
-                  movies={this.state.movies}
+                <CardSection
+                  filterFavorites={this.filterFavs}
+                  allMovies={this.state.movies}
                   userRatings={this.state.userRatings}
                   favorites={this.state.favorites}
                   toggleFavorite={this.toggleFavorite}
                   userInfo={this.state.user}
+                  favoriteMovies={this.filterFavs}
                 />
               )
             }}
           
             
-          /> */}
+          />
           <Route 
             exact path='/login' 
             render={() => {
@@ -185,14 +171,12 @@ class App extends Component {
               return (
                 <DetailsPage 
                   movieId={match.params.id}
-                  // movie={this.state.movieInfo} 
                   userId={this.state.user.id} 
                   userName={this.state.user.name}
                   deleteRating={this.deleteRating} 
                   submitRating={this.postUserRating} 
                   error={this.state.error}
                   userRatings={this.state.userRatings}
-                  // movieComments={this.state.movieComments}
                   favorites={this.state.favorites}
                   toggleFavorite={this.toggleFavorite}
                 />
