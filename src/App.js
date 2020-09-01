@@ -188,4 +188,14 @@ class App extends Component {
   };
 }
 
+App.propTypes = {
+  name: PropTypes.string.isRequired,
+  movies: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
+  userRatings: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
+}
+
+
 export default App;
