@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import { Route, Switch, render, match, Redirect} from 'react-router-dom'
-import {authorizeUser, getMovies, findMovie, getRatings, postRating, removeRating} from './APICalls'
+import { authorizeUser, getMovies, findMovie, getRatings, postRating, removeRating, postFavorite, getFavorites} from './APICalls'
 
 import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
@@ -18,7 +18,8 @@ class App extends Component {
       movies: [],
       error: '',
       user:{},
-      userRatings:[],
+      userRatings: [],
+      favorites: []
       // movieInfo: {},
       // movieComments: [],
     }
@@ -28,6 +29,7 @@ class App extends Component {
     this.postRating = postRating
     this.getRatings = getRatings
     this.removeRating = removeRating
+    this.postFavorite = postFavorite
     // this.getComments = getComments
     
   }
@@ -64,6 +66,20 @@ class App extends Component {
     })
   }
 
+  toggleFavorite = async (movieId) => {
+    await this.postFavorite(movieId)
+      .then(data => console.log('this is toggleFavorites', data))
+      .then(data => this.setState({favorites: data}))
+      .catch(error => {
+        console.log('Error fetching Favorites')
+        this.setState({ error: 'Error posting favorites' })
+      })
+  }
+
+  findFavorites = async () => {
+    await getFavorites() 
+    .then(data => this.setState({favorites: data}))
+  }
   // showInfo = (id) =>{
   //   this.findMovie(id)
   //   .then( (data) =>  this.setState({movieInfo: data.movie}))
@@ -100,21 +116,28 @@ class App extends Component {
           <Route 
             exact path='/' 
             render={() => {
-             return <CardSection 
-                allMovies={this.state.movies} 
-                // showInfo={this.showInfo}
-                userRatings={this.state.userRatings}
-              />
+              return (
+                <CardSection 
+                  allMovies={this.state.movies} 
+                  // showInfo={this.showInfo}
+                  userRatings={this.state.userRatings}
+                  favorites={this.state.favorites}
+                  toggleFavorite={this.toggleFavorite}
+                  userInfo={this.state.user}
+                />
+              )
             }}
           />
           <Route 
             exact path='/login' 
             render={() => {
               return this.state.user.name ? <Redirect to='/'/> : <Login 
-              getUser={this.getUser} 
-              error={this.state.error} 
-              user={this.state.user}
-            />}} />
+                getUser={this.getUser} 
+                error={this.state.error} 
+                user={this.state.user}
+              />
+            }} 
+          />
           <Route 
             exact path='/movies/:id' 
             render={({ match }) => {
@@ -129,10 +152,13 @@ class App extends Component {
                   error={this.state.error}
                   userRatings={this.state.userRatings}
                   // movieComments={this.state.movieComments}
+                  favorites={this.state.favorites}
+                  toggleFavorite={this.toggleFavorite}
                 />
               )
             }}
           />
+  
         </Switch>
       </main>
     )
