@@ -3,6 +3,7 @@ import './DetailsPage.css'
 import {Link} from 'react-router-dom'
 // import { render } from 'react-dom';
 import { postComment, findMovie, getComments} from '../APICalls'  
+import PropTypes from 'prop-types'
 
 class DetailsPage extends Component {
   constructor(props) {
@@ -149,6 +150,13 @@ class DetailsPage extends Component {
       </section>
     )
   }
+}
+
+DetailsPage.protoTypes = {
+  userRating: PropTypes.number.isRequired,
+  movieComments: PropTypes.string.isRequired,
+  userComment: PropTypes.string.isRequired,
+  movieInfo: PropTypes.object.isRequired
 }
 
 export default DetailsPage
