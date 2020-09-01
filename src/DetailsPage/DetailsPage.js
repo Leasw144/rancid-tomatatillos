@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import './DetailsPage.css'
 import {Link} from 'react-router-dom'
-import { render } from 'react-dom';
-import { postComment, findMovie, getComments} from '../APICalls'  // removed getComments, attempting get it work in App.js
+// import { render } from 'react-dom';
+import { postComment, findMovie, getComments} from '../APICalls'  
 
 class DetailsPage extends Component {
   constructor(props) {
@@ -63,10 +63,12 @@ class DetailsPage extends Component {
       ))
     const comments = this.state.movieComments.map(movie => {
     return (<div>
-              <p>{movie.author} says: {movie.comment}</p>
+              {movie.author && movie.comment ? <p><span>{movie.author}:</span> {movie.comment}</p> : <p>{movie.comment}</p>}
+              {/* <p><span>{movie.author}:</span> {movie.comment}</p> */}
+              {/* <p>{movie.comment}</p> */}
             </div>)
     })
-      const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
+    const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
     const displayUserRating = findMovieIRated ? <p><span>My Rating:</span> {findMovieIRated.rating.toFixed(1)}</p> : <p>You have not rated yet.</p>
     return (
       <section className='DetailsPage'>
@@ -74,16 +76,28 @@ class DetailsPage extends Component {
           {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.state.movieInfo.backdrop_path} alt={this.state.movieInfo.title} />
           {this.state.movieInfo.tagline && <p className='tag-line'>{this.state.movieInfo.tagline}</p>}
-          <form className='comment-form'>
-            <p>What did you think about {this.state.movieInfo.title}?</p>
-            <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
-            <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
-          </form>
+
+
+
+          {this.props.userName && 
+           <form className='comment-form'>
+           <p>What did you think about {this.state.movieInfo.title}?</p>
+           <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
+           <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
+         </form>
+          }
+         
+
+
+
           <section className='comments-section'>
-            <p>Movie comments:</p>
-            {console.log('comments', comments)}
+            <p><span>Movie comments:</span></p>
             <p>{comments}</p>
           </section>
+
+
+
+
         </section>
         <article className='movie-details'>
           <h1 className='movie-title'>{this.state.movieInfo.title}</h1>
