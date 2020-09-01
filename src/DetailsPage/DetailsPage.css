@@ -62,12 +62,13 @@
 .comment-form {
   display: flex;
   flex-direction: column;
-  border: 2px solid #8b3746;
-  /* width: 25rem; */
+  /* border: 3px groove #8b3746; */
   margin-left: 15%;
   padding: 10px;
   color: #E8EDDF;
   align-items: center;
+  margin-bottom: 1rem;
+  width: 66%;
 }
 
 .comment-form textarea {
@@ -79,13 +80,23 @@
 .comment-form button {
   width: 40%;
   padding: .4rem .5rem;
+  background: #723D46;
+  color: #E8EDDF;
 }
 
 .comments-section {
   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 2px solid cornflowerblue;
-    margin-left: 15%;
-    color:#E8EDDF;
+  align-items: flex-start;
+  flex-direction: column;
+  /* justify-content: center; */
+  border: 2px solid #8b3746;
+  margin-left: 15%;
+  width: 67%;
+  color:#E8EDDF;
+  padding-left: 1rem;
+}
+
+.movie-comments-title {
+  color: #C9CBA3;
+  font-size: 16px;
 }

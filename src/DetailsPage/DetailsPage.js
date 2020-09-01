@@ -91,7 +91,7 @@ class DetailsPage extends Component {
 
 
           <section className='comments-section'>
-            <p><span>Movie comments:</span></p>
+            <p className='movie-comments-title'><span>Movie comments:</span></p>
             {comments}
           </section>
 
