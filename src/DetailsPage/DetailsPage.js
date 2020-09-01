@@ -49,7 +49,7 @@ class DetailsPage extends Component {
       console.log('movie..', movie)
       this.setState({movieInfo: movie})
     } catch (error) {
-      
+      this.setState({ error: 'An error occurred. Unable to load movie details' })
     }
   }
 
@@ -60,7 +60,7 @@ class DetailsPage extends Component {
      
       this.setState({movieComments: comments})
     } catch (error) {
-      
+      this.setState({ error: 'An error occurred. Unable to load movie comments,' })
     }
     // await this.getComments(this.state.movieInfo.movieId)
     // .then(data => this.setState({movieComments: data.comments}))
@@ -117,12 +117,37 @@ class DetailsPage extends Component {
         <article className='movie-details'>
           <h1 className='movie-title'>{this.state.movieInfo.title}</h1>
           <h2>Description:</h2>
-          {this.state.movieInfo.overview && <p><span>Overview:</span> {this.state.movieInfo.overview}</p>}
-          {this.state.movieInfo.release_date && <p><span>Release Date:</span> {this.state.movieInfo.release_date}</p>}
-          {this.state.movieInfo.runtime > 0 && <p><span>Runtime:</span> {this.state.movieInfo.runtime}</p>}
-          {this.state.movieInfo.average_rating > 0 && <p><span>Average Rating:</span> {this.state.movieInfo.average_rating.toFixed(1)}</p>}
+          {
+            this.state.movieInfo.overview && 
+              <p>
+                <span>Overview:</span> {this.state.movieInfo.overview}
+              </p>
+          }
+          {
+            this.state.movieInfo.release_date && 
+              <p>
+                <span>Release Date:</span> {this.state.movieInfo.release_date}
+              </p>
+          }
+          {
+            this.state.movieInfo.runtime > 0 && 
+              <p>
+                <span>Runtime:</span> {this.state.movieInfo.runtime}
+              </p>
+          }
+          {
+            this.state.movieInfo.average_rating > 0 && 
+            <p>
+              <span>Average Rating:</span> {this.state.movieInfo.average_rating.toFixed(1)}
+            </p>
+          }
           {displayUserRating}
-          {this.state.movieInfo.budget > 0 && <p><span>Budget:</span> {this.state.movieInfo.budget}</p>}
+          {
+            this.state.movieInfo.budget > 0 && 
+            <p>
+              <span>Budget:</span> {this.state.movieInfo.budget}
+            </p>
+          }
           {this.state.movieInfo.revenue > 0 && <p><span>Revenue:</span> {this.state.movieInfo.revenue}</p>}
          <form className='rating-form'>
             <select  name='userRating' value={this.state.userRating} onChange={this.handleChange}>
