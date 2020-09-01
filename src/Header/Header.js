@@ -7,7 +7,7 @@ import Login from '../Login/Login'
 function Header(props) {
   return (
     <header>
-      <img className= 'tomato' src={tomato} alt='tomato' />
+      <Link to='/'><img className='tomato' src={tomato} alt='tomato' /></Link>
       <div>
         <h1>
           Rancid Tomatatillos
@@ -16,8 +16,7 @@ function Header(props) {
       </div>
 
       {props.user.name ? <button type='button' onClick={props.resetter}>Log out</button> : 
-      <NavLink to='/login' >
-        {/* render={Login} */}
+      <NavLink to='/login' > 
         <button>Log in</button>
       </NavLink>}
     </header>
