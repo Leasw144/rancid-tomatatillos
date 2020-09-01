@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import './Login.css';
 import { Redirect, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class Login extends Component {
   constructor(props){
@@ -47,7 +48,11 @@ class Login extends Component {
       </section>
       )
   }
+}
 
+Login.propTypes = {
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
 }
 
 export default Login
