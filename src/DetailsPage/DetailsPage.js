@@ -62,10 +62,7 @@ class DetailsPage extends Component {
       <option key={number} value={number}>{number}</option>
       ))
     const comments = this.state.movieComments.map(movie => {
-    return (<div key={movie.id}>
-              {movie.author && movie.comment ? <p><span>{movie.author}:</span> {movie.comment}</p> : <p>{movie.comment}</p>}
-              {/* <p><span>{movie.author}:</span> {movie.comment}</p> */}
-              {/* <p>{movie.comment}</p> */}
+    return (<div key={movie.id}> {movie.author && movie.comment ? <p><span>{movie.author}:</span> {movie.comment}</p> : <p>{movie.comment}</p>}
             </div>)
     })
     const findMovieIRated = this.props.userRatings.find(movie => movie.movie_id === this.state.movieInfo.id)
@@ -76,28 +73,16 @@ class DetailsPage extends Component {
           {this.props.error && <h1>{this.props.error}</h1>}
           <img className='backdrop-img' src={this.state.movieInfo.backdrop_path} alt={this.state.movieInfo.title} />
           {this.state.movieInfo.tagline && <p className='tag-line'>{this.state.movieInfo.tagline}</p>}
-
-
-
           {this.props.userName && 
            <form className='comment-form'>
            <p>What did you think about {this.state.movieInfo.title}?</p>
            <textarea name='userComment' value={this.state.userComment} placeholder='Enter comments here...' onChange={this.handleChange}></textarea>
            <button type="button"  onClick={() => this.postUserComment(this.state.userComment)}>Submit Comment</button>
-         </form>
-          }
-         
-
-
-
+         </form>}
           <section className='comments-section'>
             <p className='movie-comments-title'><span>Movie comments:</span></p>
             {comments}
           </section>
-
-
-
-
         </section>
         <article className='movie-details'>
           <h1 className='movie-title'>{this.state.movieInfo.title}</h1>
