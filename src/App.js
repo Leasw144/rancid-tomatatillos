@@ -7,7 +7,7 @@ import Header from './Header/Header'
 import CardSection from './CardSection/CardSection'
 import DetailsPage from './DetailsPage/DetailsPage'
 import Login from './Login/Login'
-import Favorite from './Favorite/Favorite'
+
 
 import './App-resources/App.css';
 import './assets/tomato.jpg'
@@ -71,13 +71,15 @@ class App extends Component {
   }
 
   toggleFavorite = async (movieId) => {
-    try {
-      await this.postFavorite(movieId)
-      const allFavs = await this.findFavorites()
-      await console.log('allFavs', allFavs)
-    } catch (error) {
-      console.log('Error fetching Favorites')
-      this.setState({ error: 'Error posting favorites' })
+    if (this.state.user.name) {
+      try {
+        await this.postFavorite(movieId)
+        const allFavs = await this.findFavorites()
+        await console.log('allFavs', allFavs)
+      } catch (error) {
+        console.log('Error fetching Favorites')
+        this.setState({ error: 'Error posting favorites' })
+      }
     }
   }
 
@@ -102,7 +104,7 @@ class App extends Component {
   // }
 
   logoutUser = () => {
-    this.setState({user: {}, userRatings:[]})
+    this.setState({user: {}, userRatings:[], favorites: []})
     return <Redirect to='/' />
   }
 
