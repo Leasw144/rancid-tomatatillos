@@ -78,14 +78,14 @@ The paired project was created using vscode. We used gitHub projects to manage i
 3. More robust testing could be further implemented including several sad path testing routes, primarily having to do with sending blank or duplicate comments.
 
 # Gif Showcase
-1. Onload
+1. Onload <br/>
   ![onload](src/assets/on-load.gif)
-2. Login and Favoriting
+2. Login and Favoriting <br/>
   ![login/favoriting](src/assets/login:favoriting.gif)
-3. Commenting
-  ![commenting](src/assets/commenting.gif)
-4. Rating Movies
+3. Rating Movies <br/>
   ![rating movies](src/assets/rating-movies.gif)
+4. Commenting <br/>
+  ![commenting](src/assets/commenting.gif)
   
   
   
