@@ -30,8 +30,6 @@ describe('App', () => {
         }
       ]
     })
-      
-
 
     render(
       <MemoryRouter>
@@ -53,6 +51,5 @@ describe('App', () => {
      
     expect(movie1).toBeInTheDocument()
     expect(movie2).toBeInTheDocument()
-  })
-   
+  })   
 })
