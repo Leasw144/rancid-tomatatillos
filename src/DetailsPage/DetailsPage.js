@@ -35,7 +35,6 @@ class DetailsPage extends Component {
         movieComments:[...this.state.movieComments, newComment]
       })
     } catch (error) {
-      console.log('error commenting on movie!')
       this.setState({error: 'An error occurred. Your comment was not saved'})
     }
   }

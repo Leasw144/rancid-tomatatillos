@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import './Login.css';
-import { Redirect, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 class Login extends Component {
@@ -34,7 +33,7 @@ class Login extends Component {
             onChange = {this.handleChange}
           />
 
-          <label htmlFor="password">Password: qwer1234</label>
+          <label htmlFor="password">Password:</label>
           <input
             type='password'
             name='password'

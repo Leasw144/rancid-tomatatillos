@@ -57,7 +57,6 @@ class App extends Component {
     await this.postRating(userId, movieId, userRating)
       .then(data => this.setState({ userRatings: [...this.state.userRatings, data.rating] }))
       .catch(error => {
-        console.log('Error fetching rating')
         this.setState({ error: 'Error posting ratings' })
       })
   }
@@ -88,9 +87,7 @@ class App extends Component {
     try {
       const allFavs = await getFavorites() 
       this.setState({favorites: allFavs})
-      console.log('right here!!!!', this.state)
     } catch(error) {
-      console.log(error)
       this.setState({ error: 'Error posting favorites' })
     }
   }
