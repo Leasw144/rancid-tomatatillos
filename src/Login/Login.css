@@ -1,27 +1,23 @@
 .Login {
- /* display: flex;
- justify-content: center; */
-
- align-items: center;
- display: flex;
- height: 100vh;
- justify-content: center;
- padding: 8px;
- background: #fff;
- width: 100vw;
-
+  background-color: #3C3E3C;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  padding: 8px;
+  width: 100vw;
 }
 
 .form-section {
-    background: #C9CBA3;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 6px;
-    height: 18rem;
-    width: 12rem;
+  background: #C9CBA3;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 6px;
+  height: 18rem;
+  width: 12rem;
 }
 
 input {

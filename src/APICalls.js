@@ -11,17 +11,6 @@ export function authorizeUser(username, password) {
       password: password,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw response;
-      }
-    })
-}
-
-export function getMovies() {
- return fetch(`${rootURL}/movies`)
   .then(response => {
     if (response.ok) {
       return response.json()
@@ -31,7 +20,17 @@ export function getMovies() {
   })
 }
 
-// currently not in use. Will need to break apart similar to other fetch calls once we enable this feature.
+export function getMovies() {
+  return fetch(`${rootURL}/movies`)
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response;
+      }
+    })
+}
+
 export function getRatings(id) {
   fetch(`${rootURL}/users/${id}/ratings`)
     .then(response => response.json())
@@ -39,7 +38,7 @@ export function getRatings(id) {
     .catch(error => {
       console.log('Error fetching your ratings')
       this.setState({ error: 'We cannot find your ratings' })
-  })
+    })
 }
 
 export function findMovie(id) {
@@ -75,18 +74,17 @@ export function postRating(userId, movieId, userRating) {
 
 export function removeRating(userId,  ratingId) {
   return fetch(`${rootURL}/users/${userId}/ratings/${ratingId}`, 
-  {
-    method: 'DELETE',
-
-  })
-  .then(response => {
-    if (response.ok) {
-      return response
-    } 
-    else {
-      throw response;
-    }
-  })
+    {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        return response
+      } 
+      else {
+        throw response;
+      }
+    })
 }
 
 export function postComment (movieId, userComment, commentAuthor) {
@@ -96,10 +94,10 @@ export function postComment (movieId, userComment, commentAuthor) {
     headers: {
       'Content-Type': 'application/json'
     },
-      body: JSON.stringify({
-        comment: userComment,
-        author: commentAuthor,
-      })
+    body: JSON.stringify({
+      comment: userComment,
+      author: commentAuthor,
+    })
   })
   .then(response => {
     if (response.ok) {
@@ -131,20 +129,19 @@ export const postFavorite = (movieId) => {
       id: movieId,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw response;
-      }
-    })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw response;
+    }
+  })
 }
 
 export const getFavorites = () => {
   return fetch('http://localhost:3001/api/v1/favorites')
   .then(response => {
     if(response.ok) {
-      console.log('getem', response)
       return response.json()
     } else {
       throw response
