@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # Rancid Tomatillos Paired Project
 Mod 3 Pair Project
 
-###Developers
+### Developers
 
   [Horacio Borrego](https://github.com/HoracioBorrego)
   [Linus](https://github.com/Leasw144)
