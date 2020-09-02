@@ -5,7 +5,7 @@ Mod 3 Pair Project
 
 ### Developers
 
-  * [Horacio Borrego](https://github.com/HoracioBorrego)
+  * [Horacio Borrego](hhttps://github.com/H-Bo214)
   
   * [Linus Leas](https://github.com/Leasw144)
 
