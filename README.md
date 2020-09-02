@@ -49,4 +49,9 @@ The paired project was created using vscode. We used gitHub projects to manage i
   
 * Successfully utilizing the React library to populate our application with the data
   
+# Gif Showcase
+  ![onload](src/assets/on-load.gif)
+  ![login/favoriting](src/assets/login:favoriting.gif)
+  ![commenting](src/assets/commenting.gif)
+  ![rating movies](src/assets/rating-movies.gif)
   
