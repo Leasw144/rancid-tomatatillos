@@ -5,9 +5,9 @@ Mod 3 Pair Project
 
 ### Developers
 
-  [Horacio Borrego](https://github.com/HoracioBorrego)
+  * [Horacio Borrego](https://github.com/HoracioBorrego)
   
-  [Linus Leas](https://github.com/Leasw144)
+  * [Linus Leas](https://github.com/Leasw144)
 
 ### Project Links
 - [Repo](https://github.com/Leasw144/rancid-tomatatillos)
