@@ -29,8 +29,6 @@ This project will demonstrate our understanding and implementation of React clas
 * CSS
 * React Router
 
-The remote repository is stored at 
-
 ## Learning Goals ##
 
 * Solidify React fundamentals
