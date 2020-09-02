@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import tomato from '../assets/tomato.jpg'
-import { Link } from 'react-browser-router'
+import { Link } from 'react-router-dom'
 
 function Header(props) {
   return (

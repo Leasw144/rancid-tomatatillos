@@ -36,7 +36,6 @@ export function getRatings(id) {
     .then(response => response.json())
     .then(data => this.setState({ userRatings: data.ratings }))
     .catch(error => {
-      console.log('Error fetching your ratings')
       this.setState({ error: 'We cannot find your ratings' })
     })
 }
@@ -88,7 +87,6 @@ export function removeRating(userId,  ratingId) {
 }
 
 export function postComment (movieId, userComment, commentAuthor) {
-  console.log('movieID in APIcalls', movieId)
   return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`, {
     method: 'POST',
     headers: {
