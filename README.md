@@ -74,8 +74,7 @@ The paired project was created using vscode. We used gitHub projects to manage i
   
 # Future Iterations/Known Issues
 1. There is currently a known bug associated with the `delete rating` button. When first deleting and submitting a rating, or vice versa, the button breaks causing a 422 (and sometimes 400) level error. Future iterations would work on fixing this bug.
-2. The comment text field is currently viewable to guests and account holders alike, future iterations would make it such that only logged in users could see and access these fields. The same goes for our rating box.
-3. More robust testing could be further implemented including several sad path testing routes, primarily having to do with sending blank or duplicate comments.
+2. More robust testing could be further implemented including several sad path testing routes, primarily having to do with sending blank or duplicate comments.
 
 # Gif Showcase
 1. Onload <br/>
